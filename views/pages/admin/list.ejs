@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>List</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<!-- modal -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: "Poppins", sans-serif
+    }
+    
+    body {
+        font-size: 16px;
+    }
+    
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    th,
+    td {
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+
+<body>
+
+
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg, rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
+        <div class="w3-container">
+            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <h4><b>
+                ระบบวิเคราะห์การเกษตร
+                <br>
+                ภาคตะวันออก
+               </b>
+            </h4>
+        </div>
+        <div class="w3-bar-block w3-padding-64">
+            <a href="/home" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
+            <a href="/list" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
+            <a href="/contact" class="w3-bar-item w3-button w3-hover-white">ติดต่อสมาชิก</a>
+            <a href="/report" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
+            <a href="/manager" class="w3-bar-item w3-button w3-hover-white">จัดการผู้ใช้งาน</a>
+            <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
+        </div>
+    </nav>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+        <!-- Header -->
+        <div class="w3-container" style="margin-top:80px" id="showcase">
+            <h1 class="w3-jumbo" style="text-align: center;"><b>รายการเพาะปลูก</b></h1>
+
+        </div>
+        <div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>รายการที่</th>
+                        <th>ชื่อผลผลิต</th>
+                        <th>ราคาผลผลิต</th>
+                        <th>หน่วยของผลผลิต</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% for(var i =0 ; i< list.length ; i ++ ){%>
+
+                        <tr>
+                            <td>
+                                <%= i + 1  %>
+                            </td>
+                            <td>
+                                <%= list[i].name %>
+                            </td>
+                            <td>
+                                <%= list[i].price %>
+                            </td>
+                            <td>
+                                <%= list[i].unit %>
+                            </td>
+                            <td><button onclick="deleteList('<%= list[i].id %>')">ลบ</button></td>
+                        </tr>
+
+                        <%} %>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- <center>
+            <div class="w3-container">
+                <button style="margin-top: 30px;" onclick="document.getElementById('id01').style.display='block'">
+                    เพิ่มรายการเพาะปลูก
+                </button>
+            </div>
+
+        </center> -->
+
+        <!-- <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+                <div class="w3-container">
+                    <center>
+                        <form action="/saveList" method="POST">
+                            <h3>เพิ่มรายการเพาะปลูก</h3>
+                            <p>ชื่อผลผลิต</p>
+                            <input type="text" style="width: 40%;" name="namelist" required>
+                            <p>ราคาผลผลิต</p>
+                            <input type="text" style="width: 40%;" name="price" required>
+                            <p>หน่วยของผลผลิต</p>
+                            <input type="text" style="width: 40%;" name="unit" required>
+                            <br>
+                            <button type="submit" style="margin-bottom: 20px;margin-top: 30px;">ยืนยัน</button>
+                            <button onclick="document.getElementById('id01').style.display='none'" type="button">ยกเลิก</button>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div> -->
+
+
+
+
+
+
+
+
+        <!-- End page content -->
+    </div>
+
+</body>
+<script>
+    function deleteList(id) {
+        window.location.href = '/deleteList/' + id
+    }
+</script>
+
+</html>

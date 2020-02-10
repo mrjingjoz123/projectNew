@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>ContactMember</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<!-- modal -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: "Poppins", sans-serif
+    }
+    
+    body {
+        font-size: 16px;
+    }
+    
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    th,
+    td {
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<body>
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg, rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
+        <div class="w3-container">
+            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <h4><b>
+                ระบบวิเคราะห์การเกษตร
+                <br>
+                ภาคตะวันออก
+               </b>
+            </h4>
+        </div>
+        <div class="w3-bar-block w3-padding-64">
+            <a href="/home" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
+            <a href="/list" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
+            <a href="/contact" class="w3-bar-item w3-button w3-hover-white">ติดต่อสมาชิก</a>
+            <a href="/report" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
+            <a href="/manager" class="w3-bar-item w3-button w3-hover-white">จัดการผู้ใช้งาน</a>
+            <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
+        </div>
+    </nav>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+        <!-- Header -->
+        <div class="w3-container" style="margin-top:80px" id="showcase">
+            <h1 class="w3-jumbo" style="text-align: center;"><b>ติดต่อสมาชิก</b></h1>
+
+        </div>
+
+        <div>
+            <h3>ถึง</h3>
+            <div style="margin-top: 20px;margin-left: 5%;">
+                <button type="button" id="button" value="all" onclick="setColor1('button','button2')" style="background-color: #35DC56;"> สมาชิกทุกคน</button>
+                <button type="button" id="button2" onclick="setColor2('button2','button')"> สมาชิกบางคน</button>
+            </div>
+        </div>
+        <form id="myForm" action="nothing.asp" method="POST">
+            <h3>ชื่อหัวข้อ</h3>
+            <input type="text" name="headname" style="width: 50%;" required>
+            <h3>ข้อความ</h3>
+            <input type="text" name="bodytext" style="width: 50%;padding: 20px 20px;" required>
+
+            <div style="margin-top: 20px;">
+                <button onclick="sendMes(document.getElementById('button').value,document.getElementById('button2').value)">ยืนยัน</button>
+            </div>
+            </from>
+
+
+            <div id="id01" class="w3-modal">
+                <div class="w3-modal-content">
+                    <div class="w3-container">
+                        <center>
+                            <h3>รายชื่อผู้ใช้ผู้ใช้งาน</h3>
+                            <table>
+                                <thead>
+
+                                    <tr>
+                                        <th>ลำดับที่</th>
+                                        <th>ชื่อผู้ใช้</th>
+                                        <th>ชื่อ-นามสกุล</th>
+                                        <th>อีเมลล์</th>
+                                        <th>สถานะ</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i =0 ; i< list.length ; i ++ ){%>
+                                        <tr>
+                                            <td>
+                                                <%= i + 1  %>
+                                            </td>
+                                            <td>
+                                                <%= list[i].username %>
+                                            </td>
+                                            <td>
+                                                <%= list[i].firstname %>
+                                                    <%= list[i].lastname %>
+                                            </td>
+                                            <td>
+                                                <%= list[i].email %>
+                                            </td>
+                                            <td>
+                                                <%= list[i].doctype %>
+                                            </td>
+                                            <td>
+                                                <button onclick="chlist('<%= list[i].username %>',value)" id="<%= list[i].username %>" value="1">เลือก</button>
+                                            </td>
+                                        </tr>
+                                        <%} %>
+                                </tbody>
+                            </table>
+
+                            <button onclick="document.getElementById('id01').style.display='none'" type="button">กลับ</button>
+
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- End page content -->
+    </div>
+
+
+
+
+</body>
+<script>
+    var user = new Array();
+
+    function setColor1(btn, btn2) {
+
+        var all = document.getElementById(btn);
+        var some = document.getElementById(btn2);
+
+        all.style.backgroundColor = '#35DC56';
+        some.style.backgroundColor = '#FFFFFF';
+        all.value = "all"
+        some.value = "null"
+    }
+
+    function setColor2(btn, btn2) {
+
+        var some = document.getElementById(btn);
+        var all = document.getElementById(btn2);
+
+        some.style.backgroundColor = '#35DC56';
+        all.style.backgroundColor = '#FFFFFF';
+        document.getElementById('id01').style.display = 'block';
+        some.value = "some"
+        all.value = "null"
+    }
+
+    function sendMes(bt, bt2) {
+        if (bt == "all") {
+            document.getElementById("myForm").action = "/saveReportAdmin";
+
+        } else if (bt2 == "some") {
+
+            document.getElementById("myForm").action = "/saveReportAdminSome/" + user;
+
+        }
+    }
+
+    function chlist(id, value) {
+        var ch = document.getElementById(id);
+        if (value == 1) {
+            ch.style.backgroundColor = '#35DC56';
+            ch.value = 0;
+            user.push(id);
+        } else {
+            ch.style.backgroundColor = '#FFFFFF';
+            ch.value = 1;
+            for (let i = 0; i < user.length; i++) {
+                if (id == user[i]) {
+                    user.splice(i, 1);
+                }
+            }
+        }
+    }
+</script>
+
+</html>

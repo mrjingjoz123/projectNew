@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>ManageMember</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<!-- modal -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: "Poppins", sans-serif
+    }
+    
+    body {
+        font-size: 16px;
+    }
+    
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    th,
+    td {
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<body>
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg, rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
+        <div class="w3-container">
+            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <h4><b>
+                ระบบวิเคราะห์การเกษตร
+                <br>
+                ภาคตะวันออก
+               </b>
+            </h4>
+        </div>
+        <div class="w3-bar-block w3-padding-64">
+            <a href="/home" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
+            <a href="/list" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
+            <a href="/contact" class="w3-bar-item w3-button w3-hover-white">ติดต่อสมาชิก</a>
+            <a href="/report" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
+            <a href="/manager" class="w3-bar-item w3-button w3-hover-white">จัดการผู้ใช้งาน</a>
+            <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
+        </div>
+    </nav>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+        <!-- Header -->
+        <div class="w3-container" style="margin-top:80px" id="showcase">
+            <h1 class="w3-jumbo" style="text-align: center;"><b>จัดการผู้ใช้งาน</b></h1>
+
+        </div>
+        <div>
+            <table>
+                <thead>
+
+                    <tr>
+                        <th>ลำดับที่</th>
+                        <th>ชื่อผู้ใช้</th>
+                        <th>ชื่อ-นามสกุล</th>
+                        <th>อีเมลล์</th>
+                        <th>สถานะ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i =0 ; i< list.length ; i ++ ){%>
+                        <tr>
+                            <td>
+                                <%= i + 1  %>
+                            </td>
+                            <td>
+                                <%= list[i].username %>
+                            </td>
+                            <td>
+                                <%= list[i].firstname %>
+                                    <%= list[i].lastname %>
+                            </td>
+                            <td>
+                                <%= list[i].email %>
+                            </td>
+                            <td>
+                                <%= list[i].doctype %>
+                            </td>
+                            <td>
+                                <button style="margin-right: 10px;" onclick="showUser('<%= list[i].username %>','<%= list[i].firstname %>','<%= list[i].lastname %>','<%= list[i].email %>','<%= list[i].phone %>','<%= list[i].birthday %>','<%= list[i].province %>','<%= list[i].district %>')">ดู</button>
+                                <button style="margin-right: 10px;" onclick="editUser('<%= list[i].id %>','<%= list[i].username %>','<%= list[i].password %>','<%= list[i].firstname %>','<%= list[i].lastname %>','<%= list[i].email %>','<%= list[i].phone %>','<%= list[i].birthday %>','<%= list[i].province %>','<%= list[i].district %>')">แก้ไข</button>
+                                <button onclick="deleteUser('<%= list[i].id %>')">ลบ</button>
+                            </td>
+                        </tr>
+                        <%} %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">ข้อมูลผู้ใช้งาน</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label id="username"></label>
+                        <br>
+                        <label id="firstname"></label>
+                        <br>
+                        <label id="lastname"></label>
+                        <br>
+                        <label id="email"></label>
+                        <br>
+                        <label id="phone"></label>
+                        <br>
+                        <label id="birthday"></label>
+                        <br>
+                        <label id="province"></label>
+                        <br>
+                        <label id="district"></label>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">แก้ไขข้อมูลผู้ใช้งาน</h4>
+                    </div>
+                    <form action="" method="POST" id="IdSave">
+                        <div class="modal-body">
+                            <label for="username">ชื่อผู้ใช้งาน</label>
+                            <br>
+                            <input type="text" placeholder="กรอกชื่อผู้ใช้งาน" name="username" id="Iusername" required>
+                            <br>
+                            <label for="password">รหัสผ่าน</label>
+                            <br>
+                            <input type="password" placeholder="กรอกรหัสผ่าน" name="password" id="Ipassword" required>
+                            <br>
+                            <label for="firstname">ชื่อจริง</label>
+                            <br>
+                            <input type="text" placeholder="กรอกชื่อจริง" name="firstname" id="Ifirstname" required>
+                            <br>
+                            <label for="lastname">นามสกุล</label>
+                            <br>
+                            <input type="text" placeholder="กรอกนามสกุล" name="lastname" id="Ilastname" required>
+                            <br>
+                            <label for="email">อีเมลล์</label>
+                            <br>
+                            <input type="email" placeholder="กรอกอีเมลล์" name="email" id="Iemail" required>
+                            <br>
+                            <label for="phone">เบอร์โทรศัพท์</label>
+                            <br>
+                            <input type="tel" placeholder="กรอกเบอร์โทรศัพท์" name="phone" id="Iphone" required>
+                            <br>
+                            <label for="birthday">วันเกิด</label>
+                            <br>
+                            <input type="date" name="birthday" id="Ibirthday" required>
+                            <br>
+                            <label for="province">จังหวัด</label>
+                            <br>
+                            <input type="text" placeholder="กรอกจังหวัด" name="province" id="Iprovince" required>
+                            <br>
+                            <label for="district">อำเภอ</label>
+                            <br>
+                            <input type="text" placeholder="กรอกอำเภอ" name="district" id="Idistrict" required>
+                            <br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-default">บันทึก</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- End page content -->
+    </div>
+
+
+
+
+</body>
+<script>
+    function deleteUser(id) {
+        window.location.href = '/deleteUser/' + id
+
+    }
+
+    function showUser(username, firstname, lastname, email, phone, birthday, province, district) {
+        var date = new Date(birthday);
+        let dateNow = date.toISOString().replace(/T/).substr(0, 10);
+        document.getElementById("username").innerHTML = username;
+        document.getElementById("firstname").innerHTML = firstname;
+        document.getElementById("lastname").innerHTML = lastname;
+        document.getElementById("email").innerHTML = email;
+        document.getElementById("phone").innerHTML = phone;
+        document.getElementById("birthday").innerHTML = dateNow;
+        document.getElementById("province").innerHTML = province;
+        document.getElementById("district").innerHTML = district;
+        $('#myModal').modal('show');
+    }
+
+    function editUser(id, username, password, firstname, lastname, email, phone, birthday, province, district) {
+        var date = new Date(birthday);
+        let dateNow = date.toISOString().replace(/T/).substr(0, 10);
+        document.getElementById("Iusername").value = username;
+        document.getElementById("Ipassword").value = password;
+        document.getElementById("Ifirstname").value = firstname;
+        document.getElementById("Ilastname").value = lastname;
+        document.getElementById("Iemail").value = email;
+        document.getElementById("Iphone").value = phone;
+        document.getElementById("Ibirthday").value = dateNow;
+        document.getElementById("Iprovince").value = province;
+        document.getElementById("Idistrict").value = district;
+        document.getElementById("IdSave").action = '/saveEditUser/' + id
+        $('#myModal2').modal('show');
+    }
+</script>
+
+</html>

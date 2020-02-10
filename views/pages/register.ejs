@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+
+    <link rel="stylesheet" href="../stylesheets/mycss.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+</head>
+
+
+<body>
+    <div class="container-login100">
+
+        <div class="wrap-register100">
+            <div>
+                <img src="../images/logo.png" alt="logo" width="200" height="200" />
+
+                <div>
+                    <span>  <b>สมัครสมาชิก</b></span>
+                </div>
+                <form action="/saveRegister" method="POST">
+                    <div style="padding-top: 30px;">
+                        <label for="username">ชื่อผู้ใช้งาน</label>
+                        <br>
+                        <input type="text" placeholder="กรอกชื่อผู้ใช้งาน" name="username" required>
+                        <br>
+                        <label for="password">รหัสผ่าน</label>
+                        <br>
+                        <input type="password" placeholder="กรอกรหัสผ่าน" name="password" id="password" required>
+                        <br>
+                        <label for="conpass">ยืนยันรหัสผ่าน</label>
+                        <br>
+                        <input type="password" placeholder="กรอกรหัสผ่านอีกครั้ง" name="conpass" id="conpass" required>
+                        <br>
+                        <label for="firstname">ชื่อจริง</label>
+                        <br>
+                        <input type="text" placeholder="กรอกชื่อจริง" name="firstname" required>
+                        <br>
+                        <label for="lastname">นามสกุล</label>
+                        <br>
+                        <input type="text" placeholder="กรอกนามสกุล" name="lastname" required>
+                        <br>
+                        <label for="email">อีเมลล์</label>
+                        <br>
+                        <input type="email" placeholder="กรอกอีเมลล์" name="email" required>
+                        <br>
+                        <label for="phone">เบอร์โทรศัพท์</label>
+                        <br>
+                        <input type="tel" placeholder="กรอกเบอร์โทรศัพท์" name="phone" required>
+                        <br>
+                        <label for="birthday">วันเกิด</label>
+                        <br>
+                        <input type="date" name="birthday" required>
+                        <br>
+                        <label for="province">จังหวัด</label>
+                        <br>
+                        <input type="text" placeholder="กรอกจังหวัด" name="province" required>
+                        <br>
+                        <label for="district">อำเภอ</label>
+                        <br>
+                        <input type="text" placeholder="กรอกอำเภอ" name="district" required>
+                        <br>
+                        <div class="container-register-form-btn">
+                            <button type="submit" class="register-form-save-btn">สมัครสมาชิก</button>
+                        </div>
+                        <div class="container-register-form-btn">
+                            <button type="button" onclick="window.history.back();" class="register-form-cancel-btn">ยกเลิก</button>
+                        </div>
+
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+</body>
+<script>
+    var password = document.getElementById("password"),
+        confirm_password = document.getElementById("conpass");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("รหัสผ่านไม่ตรงกัน");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="../stylesheets/mycss.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container-login100">
+        <div class="wrap-login100" style="text-align: center;">
+            <div class="login100-pic">
+                <img src="../images/logo.png" alt="logo" width="200" height="200" />
+                <span class="login100-form-logo">
+                    <b>
+                    ระบบวิเคราะห์การเกษตร
+                    <br>
+                    ภาคตะวันออก
+                   </b>
+                 </span>
+            </div>
+
+            <form class="login100-form" action="/presslogin" method="POST">
+                <span class="login100-form-title">
+                    <b>เข้าสู่ระบบ</b>
+                </span>
+                <div class="container">
+                    <label for="username"><b>ชื่อผู้ใช้งาน</b></label>
+                    <br>
+                    <div class="wrap-input100">
+                        <input type="text" class="input100" placeholder="กรอกชื่อผู้ใช้งาน" name="username" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+                    </div>
+                    <label for="password"><b>รหัสผ่าน</b></label>
+                    <br>
+                    <div class="wrap-input100">
+                        <input class="input100" type="password" placeholder="กรอกรหัสผ่าน" name="password" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn">เข้าสู่ระบบ</button>
+                    </div>
+                    <br>
+                    <a href='/register'>
+                        <u>สมัครสมาชิก</u>
+                    </a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
