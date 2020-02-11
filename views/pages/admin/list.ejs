@@ -38,6 +38,12 @@
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
+    
+    button {
+        border: none;
+        padding: 8px 28px;
+        cursor: pointer;
+    }
 </style>
 
 
@@ -103,7 +109,7 @@
                             <td>
                                 <%= list[i].unit %>
                             </td>
-                            <td><button onclick="deleteList('<%= list[i].id %>')">ลบ</button></td>
+                            <td><button onclick="deleteList('<%= list[i].id %>')" style="background-color: #f44336;color:white;">ลบ</button></td>
                         </tr>
 
                         <%} %>

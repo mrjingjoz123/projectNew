@@ -38,6 +38,12 @@
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
+    
+    button {
+        border: none;
+        padding: 8px 28px;
+        cursor: pointer;
+    }
 </style>
 
 <body>
@@ -75,8 +81,8 @@
         <div>
             <h3>ถึง</h3>
             <div style="margin-top: 20px;margin-left: 5%;">
-                <button type="button" id="button" value="all" onclick="setColor1('button','button2')" style="background-color: #35DC56;"> สมาชิกทุกคน</button>
-                <button type="button" id="button2" onclick="setColor2('button2','button')"> สมาชิกบางคน</button>
+                <button type="button" id="button" value="all" onclick="setColor1('button','button2')" style="background-color: #ff9900;"> สมาชิกทุกคน</button>
+                <button type="button" id="button2" onclick="setColor2('button2','button')" style="background-color: #C8C8C8;"> สมาชิกบางคน</button>
             </div>
         </div>
         <form id="myForm" action="nothing.asp" method="POST">
@@ -86,58 +92,62 @@
             <input type="text" name="bodytext" style="width: 50%;padding: 20px 20px;" required>
 
             <div style="margin-top: 20px;">
-                <button onclick="sendMes(document.getElementById('button').value,document.getElementById('button2').value)">ยืนยัน</button>
+                <button onclick="sendMes(document.getElementById('button').value,document.getElementById('button2').value)" style="background-color: #4CAF50;color:white;">ยืนยัน</button>
             </div>
             </from>
 
 
-            <div id="id01" class="w3-modal">
-                <div class="w3-modal-content">
-                    <div class="w3-container">
-                        <center>
-                            <h3>รายชื่อผู้ใช้ผู้ใช้งาน</h3>
-                            <table>
-                                <thead>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">รายชื่อผู้ใช้ผู้ใช้งาน</h4>
+                        </div>
 
+                        <table>
+                            <thead>
+
+                                <tr>
+                                    <th>ลำดับที่</th>
+                                    <th>ชื่อผู้ใช้</th>
+                                    <th>ชื่อ-นามสกุล</th>
+                                    <th>อีเมลล์</th>
+                                    <th>สถานะ</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i =0 ; i< list.length ; i ++ ){%>
                                     <tr>
-                                        <th>ลำดับที่</th>
-                                        <th>ชื่อผู้ใช้</th>
-                                        <th>ชื่อ-นามสกุล</th>
-                                        <th>อีเมลล์</th>
-                                        <th>สถานะ</th>
-                                        <th></th>
+                                        <td>
+                                            <%= i + 1  %>
+                                        </td>
+                                        <td>
+                                            <%= list[i].username %>
+                                        </td>
+                                        <td>
+                                            <%= list[i].firstname %>
+                                                <%= list[i].lastname %>
+                                        </td>
+                                        <td>
+                                            <%= list[i].email %>
+                                        </td>
+                                        <td>
+                                            <%= list[i].doctype %>
+                                        </td>
+                                        <td>
+                                            <button onclick="chlist('<%= list[i].username %>',value)" id="<%= list[i].username %>" value="1" style="background-color: #C8C8C8;">เลือก</button>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <% for(var i =0 ; i< list.length ; i ++ ){%>
-                                        <tr>
-                                            <td>
-                                                <%= i + 1  %>
-                                            </td>
-                                            <td>
-                                                <%= list[i].username %>
-                                            </td>
-                                            <td>
-                                                <%= list[i].firstname %>
-                                                    <%= list[i].lastname %>
-                                            </td>
-                                            <td>
-                                                <%= list[i].email %>
-                                            </td>
-                                            <td>
-                                                <%= list[i].doctype %>
-                                            </td>
-                                            <td>
-                                                <button onclick="chlist('<%= list[i].username %>',value)" id="<%= list[i].username %>" value="1">เลือก</button>
-                                            </td>
-                                        </tr>
-                                        <%} %>
-                                </tbody>
-                            </table>
+                                    <%} %>
+                            </tbody>
+                        </table>
 
-                            <button onclick="document.getElementById('id01').style.display='none'" type="button">กลับ</button>
-
-                        </center>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #008CBA;color:white;margin-bottom: 20px; margin-top: 20px;">กลับ</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -163,8 +173,8 @@
         var all = document.getElementById(btn);
         var some = document.getElementById(btn2);
 
-        all.style.backgroundColor = '#35DC56';
-        some.style.backgroundColor = '#FFFFFF';
+        all.style.backgroundColor = '#ff9900';
+        some.style.backgroundColor = '#C8C8C8';
         all.value = "all"
         some.value = "null"
     }
@@ -174,11 +184,13 @@
         var some = document.getElementById(btn);
         var all = document.getElementById(btn2);
 
-        some.style.backgroundColor = '#35DC56';
-        all.style.backgroundColor = '#FFFFFF';
-        document.getElementById('id01').style.display = 'block';
+        some.style.backgroundColor = '#ff9900';
+        all.style.backgroundColor = '#C8C8C8';
+
         some.value = "some"
         all.value = "null"
+
+        $('#myModal').modal('show');
     }
 
     function sendMes(bt, bt2) {
@@ -199,7 +211,7 @@
             ch.value = 0;
             user.push(id);
         } else {
-            ch.style.backgroundColor = '#FFFFFF';
+            ch.style.backgroundColor = '#C8C8C8';
             ch.value = 1;
             for (let i = 0; i < user.length; i++) {
                 if (id == user[i]) {

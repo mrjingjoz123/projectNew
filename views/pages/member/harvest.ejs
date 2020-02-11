@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Harvest</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: "Poppins", sans-serif
+    }
+    
+    body {
+        font-size: 16px;
+    }
+    
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    th,
+    td {
+        text-align: left;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    
+    button {
+        border: none;
+        padding: 8px 28px;
+        cursor: pointer;
+    }
+    
+    .dropbtn {
+        background-color: #008CBA;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+    
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .dropdown-content a:hover {
+        background-color: #f1f1f1
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    .dropdown:hover .dropbtn {
+        background-color: #006bb3;
+    }
+</style>
+
+<body>
+
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
+        <div class="w3-container">
+            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <h4><b>
+                ระบบวิเคราะห์การเกษตร
+                <br>
+                ภาคตะวันออก
+               </b>
+            </h4>
+        </div>
+        <div class="w3-bar-block" style="margin-top: 20px;">
+            <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
+            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิตแต่ละปี</a>
+            <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
+            <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
+            <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
+            <a href="/harvest" class="w3-bar-item w3-button w3-hover-white">เก็บเกี่ยว</a>
+            <a href="/conclude" class="w3-bar-item w3-button w3-hover-white">สรุป</a>
+            <a href="/reportfrommember" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
+            <a href="/contactfrommember" class="w3-bar-item w3-button w3-hover-white">ติดต่อผู้ดูแลระบบ</a>
+            <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
+        </div>
+    </nav>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+        <!-- Header -->
+        <div class="w3-container" style="margin-top:80px" id="showcase">
+            <h1 class="w3-jumbo" style="text-align: center;"><b>เก็บเกี่ยวผลผลิต</b></h1>
+        </div>
+
+
+
+        <div style="margin-top: 40px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ลำดับ</th>
+                        <th>วันที่</th>
+                        <th>รายรับ</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>1</p>
+                        </td>
+                        <td>
+                            <p>11/11/2562</p>
+                        </td>
+                        <td>
+                            <p>500</p>
+                        </td>
+                        <td>
+                            <button style="margin-right: 10px;background-color:#4CAF50 ;color:white;margin-right: 3px;">ดู</button>
+                            <button style="margin-right: 10px;background-color: #ff9900;color: white;margin-right: 3px;">แก้ไข</button>
+                            <button style="background-color:#f44336;color: white;">ลบ</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <center>
+            <div class="w3-container">
+                <button style="margin-top: 30px;background-color: #4CAF50;color:white;" onclick="document.getElementById('id01').style.display='block'">
+                เพิ่ม
+            </button>
+            </div>
+        </center>
+
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+                <center>
+                    <div class="dropdown" style="margin-top: 20px;">
+                        <button class="dropbtn" style="padding: 8px 55px;">เลือกรายการ</button>
+                        <div class="dropdown-content" style="width: 100%;">
+                            <a href="#">รายการที่ 1</a>
+                            <a href="#">รายการที่ 2</a>
+                            <a href="#">รายการที่ 3</a>
+                        </div>
+                    </div>
+                </center>
+                <div class="w3-container">
+                    <center>
+                        <form>
+                            <div style="margin-top: 40px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>จำนวนไร่</p>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
+                                            </td>
+                                            <td>
+                                                <p>ไร่</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>ค่าเก็บเกี่ยว</p>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
+                                            </td>
+                                            <td>
+                                                <p>บาท</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>ผลผลิตที่เก็บเกี่ยวได้</p>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
+                                            </td>
+                                            <td>
+                                                <p>กก.</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>ราคาผลผลิตที่ขายได้</p>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
+                                            </td>
+                                            <td>
+                                                <p>บาท/กก.</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </form>
+                    </center>
+                </div>
+
+                <div style="margin-left: 20px;">
+                    <p>รายละเอียด</p>
+                    <input type="text" style="padding: 20px 200px;margin-bottom: 20px;">
+                </div>
+
+                <center>
+                    <button type="submit" style="margin-bottom: 20px;margin-top: 30px;background-color: #4CAF50;color:white;">ยืนยัน</button>
+                    <button onclick="document.getElementById('id01').style.display='none'" type="button" style="background-color: #f44336;color: white;">ยกเลิก</button>
+                </center>
+
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- End page content -->
+    </div>
+
+
+
+
+</body>
+
+</html>

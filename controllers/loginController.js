@@ -37,7 +37,7 @@ module.exports = {
                             province = person.province,
                             district = person.district,
                             doctype = "member"
-                        res.render("pages/admin/test", { username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+                        res.render("pages/member/homemember", { username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
                     }
                 } else {
                     // res.render("pages/login", { result: 'รหัสผ่านไม่ถูกต้อง' });

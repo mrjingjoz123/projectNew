@@ -38,6 +38,12 @@
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
+    
+    button {
+        border: none;
+        padding: 8px 28px;
+        cursor: pointer;
+    }
 </style>
 
 <body>
@@ -94,8 +100,8 @@
                                 <%= mes[i].headname %>
                             </td>
                             <td>
-                                <button style="margin-right: 10px;" onclick="readMes('<%= mes[i].headname %>','<%= mes[i].bodytext %>','<%= mes[i].doctype %>','<%= mes[i].username %>','<%= mes[i].id %>')">อ่าน</button>
-                                <button onclick="deleteMes('<%= mes[i].id %>')">ลบ</button>
+                                <button style="margin-right: 10px; background-color: #4CAF50;color:white;" onclick="readMes('<%= mes[i].headname %>','<%= mes[i].bodytext %>','<%= mes[i].doctype %>','<%= mes[i].username %>','<%= mes[i].id %>')">อ่าน</button>
+                                <button onclick="deleteMes('<%= mes[i].id %>')" style="background-color: #f44336;color: white;">ลบ</button>
                             </td>
                         </tr>
                         <%} %>
@@ -110,9 +116,9 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">จดหมาย</h4>
-                        <label>จาก</label>
-                        <label id="username"></label>
+                        <h3 class="modal-title">จดหมาย</h4>
+                            <label>จาก</label>
+                            <label id="username"></label>
                     </div>
                     <div class="modal-body">
                         <h4 id="headname"></h4>
@@ -122,7 +128,7 @@
                     </div>
                     <div class="modal-footer">
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
                     </div>
                 </div>
 
