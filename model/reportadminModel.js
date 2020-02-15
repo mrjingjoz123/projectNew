@@ -10,7 +10,9 @@ const ReportadminModel = new Schema({
         type: String,
         require: true
     },
-    username: [String]
+    username: {
+        type: Array
+    }
 
 
 });

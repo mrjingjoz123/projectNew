@@ -1,7 +1,7 @@
 const Cultivate = require('../model/cultivateModel');
-const Report = require('../model/reportModel');
 const User = require('../model/userModel');
 const Reportadmin = require('../model/reportadminModel');
+const Report = require('../model/reportModel');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
@@ -54,7 +54,7 @@ module.exports = {
             .then(response => {
                 const html = response.data;
                 const $ = cheerio.load(html)
-                const statsTable = $('#__layout > section > div:nth-child(3) > section:nth-child(1) > div > div > div.price-table-wrapper > div.price-table-list-wrapper > div:nth-child(1) > div.price-list-cost');
+                const statsTable = $('#__layout > section > div:nth-child(3) > section:nth-child(1) > div > div > div.price-table-wrapper > div.price-table-list-wrapper > div:nth-child(2) > div.price-list-cost');
                 var p = statsTable.text();
                 Cultivate.findOneAndUpdate({ name: 'น้ำยางพาราสด' }, { $set: { price: Number(p) } }, { new: true },
                     (err) => {

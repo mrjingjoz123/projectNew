@@ -133,18 +133,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <p>1</p>
-                        </td>
-                        <td>
-                            <p>มะนาว</p>
-                        </td>
-                        <td>
-                            <p>4</p>
-                        </td>
-                        <td><button style="background-color: #f44336;color:white;">ลบ</button></td>
-                    </tr>
+                    <% for(var i =0 ; i< listmember.length ; i ++ ){%>
+                        <tr>
+                            <td>
+                                <p>
+                                    <%= i + 1 %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= listmember[i].product %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= listmember[i].count %>
+                                </p>
+                            </td>
+                            <td>
+                                <button style="margin-right: 10px; background-color: #ff9900;color: white;margin-right: 3px;" onclick="editList('<%= listmember[i].id %>','<%= listmember[i].product %>','<%= listmember[i].count %>')">แก้ไข</button>
+                                <button onclick="deleteList('<%= listmember[i].id %>')" style="background-color: #f44336;color:white;">ลบ</button>
+                            </td>
+                        </tr>
+                        <%} %>
                 </tbody>
             </table>
 
@@ -153,35 +164,80 @@
 
         <center>
             <div class="w3-container">
-                <button style="margin-top: 30px;background-color: #008CBA;color:white;" onclick="document.getElementById('id01').style.display='block'">
+                <button style="margin-top: 30px;background-color: #008CBA;color:white;" onclick="addListmember()">
                     เพิ่มรายการเพาะปลูก
                 </button>
             </div>
 
         </center>
 
-        <div id="id01" class="w3-modal">
-            <div class="w3-modal-content">
-                <div class="w3-container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
                     <center>
-                        <form>
+                        <form id="myForm" action="nothing.asp" method="POST">
                             <h3>เพิ่มรายการเพาะปลูก</h3>
                             <p>ท่านต้องการปลูกอะไร</p>
 
                             <div class="dropdown" style="margin-top: 20px;">
-                                <button class="dropbtn" style="padding: 7px 140px; margin-bottom: 22px;">พืชผลผลิต</button>
+                                <button class="dropbtn" style="width: 500px; margin-bottom: 22px;" id="productname">พืชผลผลิต</button>
                                 <div class="dropdown-content" style="width: 100%;">
-                                    <a href="#">มะนาว</a>
-                                    <a href="#">ข้าวโพด</a>
-                                    <a href="#">ปาล์ม</a>
+                                    <% for(var i =0 ; i< list.length ; i ++ ){%>
+                                        <button style="width: 100%;" onclick="add('<%= list[i].name %>')">
+                                            <%= list[i].name %>
+                                        </button>
+                                        <br>
+                                        <%} %>
                                 </div>
                             </div>
 
                             <p>จำนวนไร่ที่ใช้ปลูก</p>
                             <input type="text" style="width: 40%;" name="num" required>
                             <br>
-                            <button type="submit" style="margin-bottom: 20px;margin-top: 30px;background-color: #4CAF50;color:white;">ยืนยัน</button>
-                            <button onclick="document.getElementById('id01').style.display='none'" type="button" style="background-color: #f44336;color: white;">ยกเลิก</button>
+
+                            <div class="modal-footer">
+                                <button onclick="saveList('<%= username %>');" style="margin-bottom: 20px;margin-top: 30px;background-color: #4CAF50;color:white;">ยืนยัน</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
+                            </div>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <center>
+
+                        <h3>เพิ่มรายการเพาะปลูก</h3>
+                        <p>ท่านต้องการปลูกอะไร</p>
+
+                        <div class="dropdown" style="margin-top: 20px;">
+                            <button class="dropbtn" style="width: 500px; margin-bottom: 22px;" id="productname2">พืชผลผลิต</button>
+                            <div class="dropdown-content" style="width: 100%;">
+                                <% for(var i =0 ; i< list.length ; i ++ ){%>
+                                    <button style="width: 100%;" onclick="addEdit('<%= list[i].name %>')">
+                                            <%= list[i].name %>
+                                        </button>
+                                    <br>
+                                    <%} %>
+                            </div>
+                        </div>
+                        <form id="uplist" action="nothing.asp" method="POST">
+                            <div class="modal-body">
+                                <p>จำนวนไร่ที่ใช้ปลูก</p>
+                                <input type="text" style="width: 40%;" name="num2" id="num2" required>
+                                <br>
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-default" style="background-color: #4CAF50;color:white;">บันทึก</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
+                                </div>
+                            </div>
                         </form>
                     </center>
                 </div>
@@ -199,5 +255,39 @@
 
 
 </body>
+<script>
+    let product;
+
+    function addListmember() {
+        $('#myModal').modal('show');
+    }
+
+    function add(name) {
+        product = name;
+        document.getElementById("productname").innerHTML = product;
+    }
+
+    function addEdit(name) {
+        product = name;
+        document.getElementById("productname2").innerHTML = product;
+    }
+
+    function saveList(uname) {
+        document.getElementById("myForm").action = "/saveList/" + uname + "/" + product;
+    }
+
+    function editList(id, pname, count) {
+        document.getElementById("productname2").innerHTML = pname;
+        document.getElementById("num2").value = count;
+        document.getElementById("uplist").action = "/updateList/" + id;
+        $('#myModal2').modal('show');
+    }
+
+
+    function deleteList(id) {
+        window.location.href = '/deleteListmember/' + id
+
+    }
+</script>
 
 </html>

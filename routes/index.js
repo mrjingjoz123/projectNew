@@ -41,6 +41,13 @@ router.route('/listmember').get(memberController.getListmember);
 router.route('/record').get(memberController.getRecord);
 router.route('/reportfrommember').get(memberController.getReportfrommember);
 
+router.route('/saveContact/:user').post(memberController.saveContact);
+
+router.route('/saveList/:user/:product').post(memberController.saveList);
+router.route('/deleteListmember/:id').get(memberController.deleteList);
+router.route('/updateList/:id').post(memberController.updateList);
+
+
 
 
 

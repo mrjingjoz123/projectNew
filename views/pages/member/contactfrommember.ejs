@@ -122,16 +122,18 @@
 
         </div>
 
-        <form id="myForm" action="nothing.asp" method="POST">
+        <form id="myForm" action="/nothing.asp" method="POST">
             <h3>ชื่อหัวข้อ</h3>
             <input type="text" name="headname" style="width: 50%;" required>
             <h3>ข้อความ</h3>
             <input type="text" name="bodytext" style="width: 50%;padding: 20px 20px;" required>
 
             <div style="margin-top: 20px;">
-                <button style="background-color: #008CBA;color:white;">ยืนยัน</button>
+                <button onclick="send('<%= username %>')" style="background-color: #008CBA;color:white;">ยืนยัน</button>
             </div>
             </from>
+
+
 
 
 
@@ -148,5 +150,10 @@
 
 
 </body>
+<script>
+    function send(user) {
+        document.getElementById("myForm").action = "/saveContact/" + user;
+    }
+</script>
 
 </html>
