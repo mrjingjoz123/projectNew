@@ -37,16 +37,25 @@ module.exports = {
         const check = await Reportadmin.find();
         let mesh = new Array;
         let mesb = new Array;
+        let mesi = new Array;
+        for (let i = 0; i < check.length; i++) {
+            if (check[i].username.length == 0) {
+                Reportadmin.findByIdAndRemove(check[i].id, (err) => {
+                    if (err) return res.status(500).send(err);
+                    return;
+                });
+            }
+        }
         for (let i = 0; i < check.length; i++) {
             for (let j = 0; j < check[i].username.length; j++) {
                 if (username === check[i].username[j]) {
-
+                    mesi.push(check[i].id);
                     mesh.push(check[i].headname);
                     mesb.push(check[i].bodytext);
                 }
             }
         }
-        res.render('pages/member/reportfrommember', { username, password, firstname, lastname, email, phone, birthday, province, district, doctype, mesh, mesb });
+        res.render('pages/member/reportfrommember', { username, password, firstname, lastname, email, phone, birthday, province, district, doctype, mesh, mesb, mesi });
     },
     saveContact: async(req, res) => {
 
@@ -96,6 +105,43 @@ module.exports = {
         const listmember = await Listmember.find({ user: username });
         res.redirect(req.get('referer'));
         res.render('pages/member/listmember', { listmember, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
+
+    },
+    deleteReport: async(req, res) => {
+        let user = req.params.user;
+
+
+        Reportadmin.findByIdAndUpdate(req.params.id, { $pull: { username: { $in: [user] } } }, { new: true },
+            (err) => {
+                if (err) return res.status(500).send(err);
+                return
+            }
+        );
+        const check = await Reportadmin.find();
+        let mesh = new Array;
+        let mesb = new Array;
+        let mesi = new Array;
+        for (let i = 0; i < check.length; i++) {
+            if (check[i].username.length == 0) {
+                Reportadmin.findByIdAndRemove(check[i].id, (err) => {
+                    if (err) return res.status(500).send(err);
+                    return;
+                });
+            }
+        }
+        for (let i = 0; i < check.length; i++) {
+            for (let j = 0; j < check[i].username.length; j++) {
+                if (username === check[i].username[j]) {
+                    mesi.push(check[i].id);
+                    mesh.push(check[i].headname);
+                    mesb.push(check[i].bodytext);
+                }
+            }
+        }
+        res.redirect(req.get('referer'));
+        res.render('pages/member/reportfrommember', { username, password, firstname, lastname, email, phone, birthday, province, district, doctype, mesh, mesb, mesi });
+
 
 
     }

@@ -17,7 +17,13 @@ module.exports = {
         res.render('pages/admin/home');
     },
     getContactpage: async(req, res) => {
-        const list = await User.find();
+        const list1 = await User.find();
+        let list = new Array;
+        for (let i = 0; i < list1.length; i++) {
+            if (list1[i].username != 'admin') {
+                list.push(list1[i]);
+            }
+        }
         res.render('pages/admin/contact', { list });
     },
     getListpage: async(req, res) => {
@@ -121,7 +127,9 @@ module.exports = {
         const list = await User.find();
         var username = new Array();
         for (let i = 0; i < list.length; i++) {
-            username.push(list[i].username);
+            if (list[i].username != 'admin') {
+                username.push(list[i].username);
+            }
         }
 
         let mes = await new Reportadmin({

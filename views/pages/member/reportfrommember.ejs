@@ -142,7 +142,7 @@
                             </td>
                             <td>
                                 <button style="margin-right: 10px;background-color: #4CAF50;color:white;" onclick="readMes('<%= mesh[i] %>','<%= mesb[i] %>')">อ่าน</button>
-
+                                <button onclick="deleteMes('<%= mesi[i] %>','<%= username %>')" style="background-color: #f44336;color:white;">ลบ</button>
                             </td>
                         </tr>
                         <%} %>
@@ -189,7 +189,8 @@
 
 </body>
 <script>
-    function deleteMes() {
+    function deleteMes(id, user) {
+        window.location.href = '/deleteReportmember/' + id + '/' + user
 
     }
 

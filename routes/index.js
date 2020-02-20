@@ -46,7 +46,7 @@ router.route('/saveContact/:user').post(memberController.saveContact);
 router.route('/saveList/:user/:product').post(memberController.saveList);
 router.route('/deleteListmember/:id').get(memberController.deleteList);
 router.route('/updateList/:id').post(memberController.updateList);
-
+router.route('/deleteReportmember/:id/:user').get(memberController.deleteReport);
 
 
 
