@@ -124,187 +124,187 @@
 
         <center>
             <div class="dropdown" style="margin-top: 20px;">
-                <button class="dropbtn" style="padding: 8px 50px;">เลือกรายการ</button>
+                <button class="dropbtn" style="width: 500px; margin-bottom: 22px;" id="productname">เลือกรายการ</button>
                 <div class="dropdown-content" style="width: 100%;">
-                    <a href="#">รายการที่ 1</a>
-                    <a href="#">รายการที่ 2</a>
-                    <a href="#">รายการที่ 3</a>
+                    <% for(var i =0 ; i< listmember.length ; i ++ ){%>
+                        <button style="width: 100%;" onclick="add('<%= listmember[i].product %>','<%= listmember[i].count %>','<%= price %>')">
+                            <%= listmember[i].product %>
+                        </button>
+                        <br>
+                        <%} %>
                 </div>
             </div>
 
-            <div style="margin-top: 40px;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <p>ค่าแรงทั้งหมด</p>
-                            </td>
-                            <td>
-                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                            </td>
-                            <td>
-                                <p>บาท</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>ค่าวัสดุ</p>
-                            </td>
-                            <td>
-                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                            </td>
-                            <td>
-                                <p>บาท</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>ค่าเช่าที่ดิน</p>
-                            </td>
-                            <td>
-                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                            </td>
-                            <td>
-                                <p>บาท</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>ค่าผลผลิตที่จะได้</p>
-                            </td>
-                            <td>
-                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                            </td>
-                            <td>
-                                <p>กก./ไร่</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div>
+                <div style="margin-top: 40px;">
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p>ค่าแรงทั้งหมด</p>
+                                </td>
+                                <td>
+                                    <input type="number" style="margin-left: 20px;margin-right: 20px;" id="power" required>
+                                </td>
+                                <td>
+                                    <p>บาท</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>ค่าวัสดุทั้งหมด</p>
+                                </td>
+                                <td>
+                                    <input type="number" style="margin-left: 20px;margin-right: 20px;" id="material" required>
+                                </td>
+                                <td>
+                                    <p>บาท</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>ค่าเช่าที่ดินทั้งหมด</p>
+                                </td>
+                                <td>
+                                    <input type="number" style="margin-left: 20px;margin-right: 20px;" id="rent" required>
+                                </td>
+                                <td>
+                                    <p>บาท</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>ผลิตที่คาดว่าจะเก็บเกี่ยวได้</p>
+                                </td>
+                                <td>
+                                    <input type="number" style="margin-left: 20px;margin-right: 20px;" id="harvest" required>
+                                </td>
+                                <td>
+                                    <p id="unit">กก.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="w3-container">
+                        <button style="margin-top: 30px;background-color: #4CAF50;color:white;" onclick="cal()">คำนวณ</button>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="w3-container">
-                <button style="margin-top: 30px;background-color: #4CAF50;color:white;" onclick="document.getElementById('id01').style.display='block'">
-                    คำนวณ
-                </button>
-            </div>
         </center>
 
-        <div id="id01" class="w3-modal">
-            <div class="w3-modal-content">
-                <div class="w3-container">
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
                     <center>
-                        <form>
-                            <div style="margin-top: 40px;">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <p>ต้นทุนรวม</p>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                                            </td>
-                                            <td>
-                                                <p>บาท</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p></p>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                                            </td>
-                                            <td>
-                                                <p>บาท/ไร่</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>รายได้</p>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                                            </td>
-                                            <td>
-                                                <p>บาท</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p></p>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                                            </td>
-                                            <td>
-                                                <p>บาท/ไร่</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>กำไร/ขาดทุน</p>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                                            </td>
-                                            <td>
-                                                <p>บาท</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p></p>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                                            </td>
-                                            <td>
-                                                <p>บาท/ไร่</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p>ต้นทุนของ ศสก.(ศสก.คืออะไรวะ?)</p>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                                            </td>
-                                            <td>
-                                                <p>บาท</p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <p></p>
-                                            </td>
-                                            <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
-                                            </td>
-                                            <td>
-                                                <p>บาท/ไร่</p>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <button onclick="document.getElementById('id01').style.display='none'" type="button" style="background-color: #008CBA;color: white; margin-top: 10px;margin-bottom: 10px;">ปิด</button>
-                        </form>
+
+                        <div style="margin-top: 40px;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>ต้นทุนรวม</p>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="cost" style="margin-left: 20px;margin-right: 20px;" readonly>
+                                        </td>
+                                        <td>
+                                            <p>บาท</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p></p>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="cost2" style="margin-left: 20px;margin-right: 20px;" readonly>
+                                        </td>
+                                        <td>
+                                            <p>บาท/ไร่</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>รายได้</p>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="income" style="margin-left: 20px;margin-right: 20px;" readonly>
+                                        </td>
+                                        <td>
+                                            <p>บาท</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p></p>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="income2" style="margin-left: 20px;margin-right: 20px;" readonly>
+                                        </td>
+                                        <td>
+                                            <p>บาท/ไร่</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>กำไร/ขาดทุน</p>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="profit" style="margin-left: 20px;margin-right: 20px;" readonly>
+                                        </td>
+                                        <td>
+                                            <p>บาท</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p></p>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="profit2" style="margin-left: 20px;margin-right: 20px;" readonly>
+                                        </td>
+                                        <td>
+                                            <p>บาท/ไร่</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>ต้นทุนของ สศก. ต่อปี</p>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="official" style="margin-left: 20px;margin-right: 20px;" readonly>
+                                        </td>
+                                        <td>
+                                            <p>บาท</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p></p>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="official2" style="margin-left: 20px;margin-right: 20px;" readonly>
+                                        </td>
+                                        <td>
+                                            <p>บาท/ไร่</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
+
                     </center>
                 </div>
             </div>
@@ -330,5 +330,108 @@
 
 
 </body>
+
+<script>
+    let product;
+    let num;
+    let pnum = new Array;
+
+    function cal() {
+        if (document.getElementById("power").value != '' && document.getElementById("material").value != '' && document.getElementById("rent").value != '' && document.getElementById("harvest").value != '') {
+            var p = Number(document.getElementById("power").value);
+            var m = Number(document.getElementById("material").value);
+            var r = Number(document.getElementById("rent").value);
+            var h = Number(document.getElementById("harvest").value);
+            var n = Number(num);
+            console.log(pnum)
+            $('#myModal').modal('show');
+            if (product == 'อ้อยโรงงาน') {
+                document.getElementById("cost").value = Number(p + m + r);
+                document.getElementById("cost2").value = Number((p + m + r) / n);
+                document.getElementById("income").value = Number(h * pnum[0]);
+                document.getElementById("income2").value = Number((h * pnum[0]) / n);
+                document.getElementById("profit").value = Number((h * pnum[0]) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum[0]) - (p + m + r)) / n);
+                document.getElementById("official").value = Number(10482.13 * n);
+                document.getElementById("official2").value = Number(10482.13);
+            }
+            if (product == 'สับปะรดสีทองเบอร์ใหญ่') {
+                document.getElementById("cost").value = Number(p + m + r);
+                document.getElementById("cost2").value = Number((p + m + r) / n);
+                document.getElementById("income").value = Number(h * pnum[1]);
+                document.getElementById("income2").value = Number((h * pnum[1]) / n);
+                document.getElementById("profit").value = Number((h * pnum[1]) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum[1]) - (p + m + r)) / n);
+                document.getElementById("official").value = Number(17529.10 * n);
+                document.getElementById("official2").value = Number(17529.10);
+            }
+            if (product == 'น้ำยางพาราสด') {
+                document.getElementById("cost").value = Number(p + m + r);
+                document.getElementById("cost2").value = Number((p + m + r) / n);
+                document.getElementById("income").value = Number(h * pnum[2]);
+                document.getElementById("income2").value = Number((h * pnum[2]) / n);
+                document.getElementById("profit").value = Number((h * pnum[2]) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum[2]) - (p + m + r)) / n);
+                document.getElementById("official").value = Number(14230.32 * n);
+                document.getElementById("official2").value = Number(14230.32);
+            }
+            if (product == 'ผลปาล์มน้ำมัน') {
+                document.getElementById("cost").value = Number(p + m + r);
+                document.getElementById("cost2").value = Number((p + m + r) / n);
+                document.getElementById("income").value = Number(h * pnum[3]);
+                document.getElementById("income2").value = Number((h * pnum[3]) / n);
+                document.getElementById("profit").value = Number((h * pnum[3]) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum[3]) - (p + m + r)) / n);
+                document.getElementById("official").value = Number(7459.07 * n);
+                document.getElementById("official2").value = Number(7459.07);
+            }
+            if (product == 'ข้าวเจ้า') {
+                document.getElementById("cost").value = Number(p + m + r);
+                document.getElementById("cost2").value = Number((p + m + r) / n);
+                document.getElementById("income").value = Number(h * pnum[4]);
+                document.getElementById("income2").value = Number((h * pnum[4]) / n);
+                document.getElementById("profit").value = Number((h * pnum[4]) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum[4]) - (p + m + r)) / n);
+                document.getElementById("official").value = Number(3968.21 * n);
+                document.getElementById("official2").value = Number(3968.21);
+
+            }
+        }
+
+    }
+
+    function add(name, count, price) {
+        num = count
+        product = name;
+        var matches = ['']
+        var open = false
+        for (i in price) {
+            if (price[i] == ',' && !open) {
+                matches.push('')
+
+            } else {
+                matches[matches.length - 1] += price[i]
+            }
+        }
+        pnum = matches;
+        if (name == 'อ้อยโรงงาน') {
+            document.getElementById("unit").innerHTML = 'ตัน';
+        }
+        if (name == 'สับปะรดสีทองเบอร์ใหญ่') {
+            document.getElementById("unit").innerHTML = 'กก.';
+        }
+        if (name == 'น้ำยางพาราสด') {
+            document.getElementById("unit").innerHTML = 'กก.';
+        }
+        if (name == 'ผลปาล์มน้ำมัน') {
+            document.getElementById("unit").innerHTML = 'กก.';
+        }
+        if (name == 'ข้าวเจ้า') {
+            document.getElementById("unit").innerHTML = 'ตัน';
+        }
+        document.getElementById("productname").innerHTML = product;
+
+    }
+</script>
 
 </html>

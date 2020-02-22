@@ -10,8 +10,20 @@ module.exports = {
     },
 
     getCalcost: async(req, res) => {
-        res.render('pages/member/calcost');
+        let price = new Array;
+        const list = await Cultivate.find();
+        const listmember = await Listmember.find({ user: username });
+        for (let i = 0; i < list.length; i++) {
+            for (let j = 0; j < listmember.length; j++) {
+                if (list[i].name == listmember[j].product) {
+                    price.push(list[i].price);
+                }
+            }
+        }
+
+        res.render('pages/member/calcost', { price, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
     },
+
     getConclude: async(req, res) => {
         res.render('pages/member/conclude');
     },
