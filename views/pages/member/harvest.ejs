@@ -123,61 +123,54 @@
 
 
 
-        <div style="margin-top: 40px;">
+        <div>
             <table>
                 <thead>
                     <tr>
-                        <th>ลำดับ</th>
-                        <th>วันที่</th>
-                        <th>รายรับ</th>
+                        <th>รายการที่</th>
+                        <th>ชื่อผลผลิต</th>
+                        <th>จำนวนไร่</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <p>1</p>
-                        </td>
-                        <td>
-                            <p>11/11/2562</p>
-                        </td>
-                        <td>
-                            <p>500</p>
-                        </td>
-                        <td>
-                            <button style="margin-right: 10px;background-color:#4CAF50 ;color:white;margin-right: 3px;">ดู</button>
-                            <button style="margin-right: 10px;background-color: #ff9900;color: white;margin-right: 3px;">แก้ไข</button>
-                            <button style="background-color:#f44336;color: white;">ลบ</button>
-                        </td>
-                    </tr>
+                    <% for(var i =0 ; i< listmember.length ; i ++ ){%>
+                        <tr>
+                            <td>
+                                <p>
+                                    <%= i + 1 %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= listmember[i].product %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= listmember[i].count %>
+                                </p>
+                            </td>
+                            <td>
+                                <button style="margin-top: 30px;background-color: #4CAF50;color:white;" onclick="add('<%= listmember[i].id %>','<%= listmember[i].count %>','<%= listmember[i].user %>','<%= listmember[i].product %>')">บันทึกการเก็บเกี่ยว</button>
+                                <button style="margin-top: 30px;background-color: #008CBA;color:white;" onclick="show('<%= listmember[i].id %>','<%= listmember[i].product %>')">แสดงบันทึก</button>
+                            </td>
+                        </tr>
+                        <%} %>
                 </tbody>
             </table>
+
         </div>
 
-        <center>
-            <div class="w3-container">
-                <button style="margin-top: 30px;background-color: #4CAF50;color:white;" onclick="document.getElementById('id01').style.display='block'">
-                เพิ่ม
-            </button>
-            </div>
-        </center>
-
-        <div id="id01" class="w3-modal">
-            <div class="w3-modal-content">
-                <center>
-                    <div class="dropdown" style="margin-top: 20px;">
-                        <button class="dropbtn" style="padding: 8px 55px;">เลือกรายการ</button>
-                        <div class="dropdown-content" style="width: 100%;">
-                            <a href="#">รายการที่ 1</a>
-                            <a href="#">รายการที่ 2</a>
-                            <a href="#">รายการที่ 3</a>
-                        </div>
-                    </div>
-                </center>
-                <div class="w3-container">
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
                     <center>
-                        <form>
-                            <div style="margin-top: 40px;">
+                        <h3>บันทึกการเก็บเกี่ยว</h3>
+                        <h4 id="hname"></h4>
+                        <form id="save" action="nothing.asp" method="POST">
+                            <div class="modal-body">
                                 <table>
                                     <thead>
                                         <tr>
@@ -192,7 +185,7 @@
                                                 <p>จำนวนไร่</p>
                                             </td>
                                             <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
+                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="count" required>
                                             </td>
                                             <td>
                                                 <p>ไร่</p>
@@ -203,7 +196,7 @@
                                                 <p>ค่าเก็บเกี่ยว</p>
                                             </td>
                                             <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
+                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="harvest" required>
                                             </td>
                                             <td>
                                                 <p>บาท</p>
@@ -214,7 +207,7 @@
                                                 <p>ผลผลิตที่เก็บเกี่ยวได้</p>
                                             </td>
                                             <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
+                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="num" required>
                                             </td>
                                             <td>
                                                 <p>กก.</p>
@@ -225,32 +218,31 @@
                                                 <p>ราคาผลผลิตที่ขายได้</p>
                                             </td>
                                             <td>
-                                                <input type="text" style="margin-left: 20px;margin-right: 20px;">
+                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="price" required>
                                             </td>
                                             <td>
-                                                <p>บาท/กก.</p>
+                                                <p id="unit">บาท/กก.</p>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div style="margin-left: 5px;">
+                                    <p>รายละเอียด</p>
+                                    <input type="text" name="detail" style="padding: 20px 30%;margin-bottom: 20px;">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-default" style="background-color: #4CAF50;color:white;">บันทึก</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
+                                </div>
                             </div>
-
                         </form>
                     </center>
                 </div>
-
-                <div style="margin-left: 20px;">
-                    <p>รายละเอียด</p>
-                    <input type="text" style="padding: 20px 200px;margin-bottom: 20px;">
-                </div>
-
-                <center>
-                    <button type="submit" style="margin-bottom: 20px;margin-top: 30px;background-color: #4CAF50;color:white;">ยืนยัน</button>
-                    <button onclick="document.getElementById('id01').style.display='none'" type="button" style="background-color: #f44336;color: white;">ยกเลิก</button>
-                </center>
-
             </div>
         </div>
+
+
+
 
 
 
@@ -264,5 +256,32 @@
 
 
 </body>
+<script>
+    function add(id, num, user, product) {
+        document.getElementById('hname').innerHTML = product;
+        if (product == 'อ้อยโรงงาน') {
+            document.getElementById("unit").innerHTML = 'บาท/ตัน';
+        }
+        if (product == 'สับปะรดสีทองเบอร์ใหญ่') {
+            document.getElementById("unit").innerHTML = 'บาท/กก.';
+        }
+        if (product == 'น้ำยางพาราสด') {
+            document.getElementById("unit").innerHTML = 'บาท/กก.';
+        }
+        if (product == 'ผลปาล์มน้ำมัน') {
+            document.getElementById("unit").innerHTML = 'บาท/กก.';
+        }
+        if (product == 'ข้าวเจ้า') {
+            document.getElementById("unit").innerHTML = 'บาท/ตัน';
+        }
+        $('#myModal').modal('show');
+        document.getElementById("save").action = "/saveHarvest/" + id + "/" + user;
+    }
+
+    function show(id, product) {
+        window.location.href = 'showHarvest/' + id + "/" + product;
+
+    }
+</script>
 
 </html>

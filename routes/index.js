@@ -47,11 +47,15 @@ router.route('/saveList/:user/:product').post(memberController.saveList);
 router.route('/deleteListmember/:id').get(memberController.deleteList);
 router.route('/updateList/:id').post(memberController.updateList);
 router.route('/deleteReportmember/:id/:user').get(memberController.deleteReport);
+router.route('/saveRecord/:id/:user').post(memberController.saveRecord);
+router.route('/showRecord/:id/:product').get(memberController.showRecord);
+router.route('/editRecord/:id').post(memberController.editRecord);
+router.route('/deleteRecord/:id').get(memberController.deleteRecord);
 
-
-
-
-
+router.route('/saveHarvest/:id/:user').post(memberController.saveHarvest);
+router.route('/showHarvest/:id/:product').get(memberController.showHarvest);
+router.route('/editHarvest/:id').post(memberController.editHarvest);
+router.route('/deleteHarvest/:id').get(memberController.deleteHarvest);
 
 
 

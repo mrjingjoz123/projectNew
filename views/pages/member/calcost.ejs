@@ -126,12 +126,14 @@
             <div class="dropdown" style="margin-top: 20px;">
                 <button class="dropbtn" style="width: 500px; margin-bottom: 22px;" id="productname">เลือกรายการ</button>
                 <div class="dropdown-content" style="width: 100%;">
-                    <% for(var i =0 ; i< listmember.length ; i ++ ){%>
-                        <button style="width: 100%;" onclick="add('<%= listmember[i].product %>','<%= listmember[i].count %>','<%= price %>')">
-                            <%= listmember[i].product %>
-                        </button>
-                        <br>
-                        <%} %>
+                    <% for(var i =0 ; i < list.length ; i ++ ){  %>
+                        <% for(var j =0 ; j < listmember.length ; j ++ ){  %>
+                            <% if( list[i].name == listmember[j].product){ %>
+                                <button style="width: 100%;" onclick="add('<%= listmember[j].product %>','<%= listmember[j].count %>','<%= list[i].price %>')"><%= listmember[j].product %> จำนวน <%= listmember[j].count %> ไร่</button>
+                                <br>
+                                <%} %>
+                                    <%} %>
+                                        <%} %>
                 </div>
             </div>
 
@@ -303,8 +305,10 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
+                        <div class="modal-footer">
 
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
+                        </div>
                     </center>
                 </div>
             </div>
@@ -334,7 +338,8 @@
 <script>
     let product;
     let num;
-    let pnum = new Array;
+    let pnum;
+
 
     function cal() {
         if (document.getElementById("power").value != '' && document.getElementById("material").value != '' && document.getElementById("rent").value != '' && document.getElementById("harvest").value != '') {
@@ -348,50 +353,50 @@
             if (product == 'อ้อยโรงงาน') {
                 document.getElementById("cost").value = Number(p + m + r);
                 document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum[0]);
-                document.getElementById("income2").value = Number((h * pnum[0]) / n);
-                document.getElementById("profit").value = Number((h * pnum[0]) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum[0]) - (p + m + r)) / n);
+                document.getElementById("income").value = Number(h * pnum);
+                document.getElementById("income2").value = Number((h * pnum) / n);
+                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
                 document.getElementById("official").value = Number(10482.13 * n);
                 document.getElementById("official2").value = Number(10482.13);
             }
             if (product == 'สับปะรดสีทองเบอร์ใหญ่') {
                 document.getElementById("cost").value = Number(p + m + r);
                 document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum[1]);
-                document.getElementById("income2").value = Number((h * pnum[1]) / n);
-                document.getElementById("profit").value = Number((h * pnum[1]) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum[1]) - (p + m + r)) / n);
+                document.getElementById("income").value = Number(h * pnum);
+                document.getElementById("income2").value = Number((h * pnum) / n);
+                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
                 document.getElementById("official").value = Number(17529.10 * n);
                 document.getElementById("official2").value = Number(17529.10);
             }
             if (product == 'น้ำยางพาราสด') {
                 document.getElementById("cost").value = Number(p + m + r);
                 document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum[2]);
-                document.getElementById("income2").value = Number((h * pnum[2]) / n);
-                document.getElementById("profit").value = Number((h * pnum[2]) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum[2]) - (p + m + r)) / n);
+                document.getElementById("income").value = Number(h * pnum);
+                document.getElementById("income2").value = Number((h * pnum) / n);
+                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
                 document.getElementById("official").value = Number(14230.32 * n);
                 document.getElementById("official2").value = Number(14230.32);
             }
             if (product == 'ผลปาล์มน้ำมัน') {
                 document.getElementById("cost").value = Number(p + m + r);
                 document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum[3]);
-                document.getElementById("income2").value = Number((h * pnum[3]) / n);
-                document.getElementById("profit").value = Number((h * pnum[3]) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum[3]) - (p + m + r)) / n);
+                document.getElementById("income").value = Number(h * pnum);
+                document.getElementById("income2").value = Number((h * pnum) / n);
+                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
                 document.getElementById("official").value = Number(7459.07 * n);
                 document.getElementById("official2").value = Number(7459.07);
             }
             if (product == 'ข้าวเจ้า') {
                 document.getElementById("cost").value = Number(p + m + r);
                 document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum[4]);
-                document.getElementById("income2").value = Number((h * pnum[4]) / n);
-                document.getElementById("profit").value = Number((h * pnum[4]) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum[4]) - (p + m + r)) / n);
+                document.getElementById("income").value = Number(h * pnum);
+                document.getElementById("income2").value = Number((h * pnum) / n);
+                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
+                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
                 document.getElementById("official").value = Number(3968.21 * n);
                 document.getElementById("official2").value = Number(3968.21);
 
@@ -403,17 +408,9 @@
     function add(name, count, price) {
         num = count
         product = name;
-        var matches = ['']
-        var open = false
-        for (i in price) {
-            if (price[i] == ',' && !open) {
-                matches.push('')
+        pnum = price
 
-            } else {
-                matches[matches.length - 1] += price[i]
-            }
-        }
-        pnum = matches;
+
         if (name == 'อ้อยโรงงาน') {
             document.getElementById("unit").innerHTML = 'ตัน';
         }
@@ -429,7 +426,7 @@
         if (name == 'ข้าวเจ้า') {
             document.getElementById("unit").innerHTML = 'ตัน';
         }
-        document.getElementById("productname").innerHTML = product;
+        document.getElementById("productname").innerHTML = product + ' จำนวน ' + count;
 
     }
 </script>
