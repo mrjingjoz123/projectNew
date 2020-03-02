@@ -13,7 +13,6 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://admin:123456d@ds021034.mlab.com:21034/project');
 
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

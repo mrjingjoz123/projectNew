@@ -4,15 +4,7 @@ const Listmember = require('../model/listmemberModel');
 const Cultivate = require('../model/cultivateModel');
 const Record = require('../model/recordModel');
 const Harvest = require('../model/harvestModel');
-const axios = require('axios');
-const cheerio = require('cheerio');
 
-const url = 'https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%AD%E0%B9%89%E0%B8%AD%E0%B8%A2%E0%B9%82%E0%B8%A3%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89';
-const url2 = 'https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%AA%E0%B8%B1%E0%B8%9A%E0%B8%9B%E0%B8%B0%E0%B8%A3%E0%B8%94/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89';
-const url3 = 'https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%A2%E0%B8%B2%E0%B8%87%E0%B8%9E%E0%B8%B2%E0%B8%A3%E0%B8%B2/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89';
-const url4 = 'https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%9B%E0%B8%B2%E0%B8%A5%E0%B9%8C%E0%B8%A1%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89';
-const url5 = 'https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B9%80%E0%B8%9B%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89';
-// const url6 = '';
 
 module.exports = {
 
@@ -21,110 +13,43 @@ module.exports = {
     },
 
     getCalcost: async(req, res) => {
-        axios(url)
-            .then(response => {
-                const html = response.data;
-                const $ = cheerio.load(html)
-                const statsTable = $('#__layout > section > div:nth-child(3) > section:nth-child(1) > div > div > div.price-table-wrapper > div.price-table-list-wrapper > div > div.price-list-cost');
-                var p = statsTable.text();
-                Cultivate.findOneAndUpdate({ name: 'อ้อยโรงงาน' }, { $set: { price: Number(p) } }, { new: true },
-                    (err) => {
-                        if (err) return res.status(500).send(err);
-                        return
-                    }
-                );
-            })
-            .catch(console.error);
-        axios(url2)
-            .then(response => {
-                const html = response.data;
-                const $ = cheerio.load(html)
-                const statsTable = $('#__layout > section > div:nth-child(3) > section:nth-child(1) > div > div > div.price-table-wrapper > div.price-table-list-wrapper > div:nth-child(1) > div.price-list-cost');
-                var p = statsTable.text();
-                Cultivate.findOneAndUpdate({ name: 'สับปะรดสีทองเบอร์ใหญ่' }, { $set: { price: Number(p) } }, { new: true },
-                    (err) => {
-                        if (err) return res.status(500).send(err);
-                        return
-                    }
-                );
-            })
-            .catch(console.error);
-
-        axios(url3)
-            .then(response => {
-                const html = response.data;
-                const $ = cheerio.load(html)
-                const statsTable = $('#__layout > section > div:nth-child(3) > section:nth-child(1) > div > div > div.price-table-wrapper > div.price-table-list-wrapper > div:nth-child(2) > div.price-list-cost');
-                var p = statsTable.text();
-                Cultivate.findOneAndUpdate({ name: 'น้ำยางพาราสด' }, { $set: { price: Number(p) } }, { new: true },
-                    (err) => {
-                        if (err) return res.status(500).send(err);
-                        return
-                    }
-                );
-            })
-            .catch(console.error);
-
-        axios(url4)
-            .then(response => {
-                const html = response.data;
-                const $ = cheerio.load(html)
-                const statsTable = $('#__layout > section > div:nth-child(3) > section:nth-child(1) > div > div > div.price-table-wrapper > div.price-table-list-wrapper > div > div.price-list-cost');
-                var p = statsTable.text();
-                Cultivate.findOneAndUpdate({ name: 'ผลปาล์มน้ำมัน' }, { $set: { price: Number(p) } }, { new: true },
-                    (err) => {
-                        if (err) return res.status(500).send(err);
-                        return
-                    }
-                );
-            })
-            .catch(console.error);
-
-        axios(url5)
-            .then(response => {
-                const html = response.data;
-                const $ = cheerio.load(html)
-                const statsTable = $('#__layout > section > div:nth-child(3) > section:nth-child(1) > div > div > div.price-table-wrapper > div.price-table-list-wrapper > div:nth-child(3) > div.price-list-cost');
-                var p = statsTable.text();
-                Cultivate.findOneAndUpdate({ name: 'ข้าวเจ้า' }, { $set: { price: Number(p) } }, { new: true },
-                    (err) => {
-                        if (err) return res.status(500).send(err);
-                        return
-                    }
-                );
-            })
-            .catch(console.error);
-
         const list = await Cultivate.find();
         const listmember = await Listmember.find({ user: username });
-
         res.render('pages/member/calcost', { list, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
     },
 
     getConclude: async(req, res) => {
-        res.render('pages/member/conclude');
+        const record = await Record.find({ username: username });
+        const harvest = await Harvest.find({ username: username });
+        const list = await Cultivate.find();
+        const listmember = await Listmember.find({ user: username });
+        var check = 0;
+        res.render('pages/member/conclude', { check, record, harvest, list, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
     },
     getContactfrommember: async(req, res) => {
-        res.render('pages/member/contactfrommember', { username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        var check = 0;
+        res.render('pages/member/contactfrommember', { check, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
     },
     getGraph: async(req, res) => {
-        res.render('pages/member/graph');
+        const list = await Cultivate.find();
+        res.render('pages/member/graph', { list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
     },
     getHarvest: async(req, res) => {
-
+        var check = 0;
         const listmember = await Listmember.find({ user: username });
-        res.render('pages/member/harvest', { listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        res.render('pages/member/harvest', { check, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
     },
     getListmember: async(req, res) => {
         const list = await Cultivate.find();
         const listmember = await Listmember.find({ user: username });
-
-        res.render('pages/member/listmember', { listmember, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        var check = 0;
+        res.render('pages/member/listmember', { check, listmember, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
     },
     getRecord: async(req, res) => {
-        // const listrecord = await Record.find({ username: username });
+        var check = 0;
         const listmember = await Listmember.find({ user: username });
-        res.render('pages/member/record', { listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        res.render('pages/member/record', { check, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
 
     },
     getReportfrommember: async(req, res) => {
@@ -149,18 +74,20 @@ module.exports = {
                 }
             }
         }
-        res.render('pages/member/reportfrommember', { username, password, firstname, lastname, email, phone, birthday, province, district, doctype, mesh, mesb, mesi });
+        let test = 0;
+        res.render('pages/member/reportfrommember', { username, password, firstname, lastname, email, phone, birthday, province, district, doctype, mesh, mesb, mesi, test });
     },
     saveContact: async(req, res) => {
 
-        let mes = await new Report({
+        let mes = new Report({
             headname: req.body.headname,
             bodytext: req.body.bodytext,
             doctype: 'member',
             username: req.params.user
         });
-        mes.save();
-        res.redirect(req.get('referer'));
+        await mes.save();
+        let check = 1;
+        res.render('pages/member/contactfrommember', { check, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
     },
     saveList: async(req, res) => {
         let user = req.params.user;
@@ -168,27 +95,37 @@ module.exports = {
         let lismember = new Listmember({
             product: product,
             count: req.body.num,
-            user: user
+            user: user,
+            pay: req.body.pay
         });
         // save to database
-        lismember.save();
+        await lismember.save();
 
-        res.redirect(req.get('referer'));
+        const list = await Cultivate.find();
+        const listmember = await Listmember.find({ user: username });
+        var check = 1;
+        res.render('pages/member/listmember', { check, listmember, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
     },
     deleteList: async(req, res) => {
         var id = req.params.id;
-        Listmember.findByIdAndRemove(id, (err) => {
+        await Listmember.findByIdAndRemove(id, (err) => {
             if (err) return res.status(500).send(err);
-            return res.redirect(req.get('referer'));
+            return
         });
+        await Record.find({ idlist: id }).remove().exec();
+        await Harvest.find({ idlist: id }).remove().exec();
+
+        const list = await Cultivate.find();
+        const listmember = await Listmember.find({ user: username });
+        var check = 2;
+        res.render('pages/member/listmember', { check, listmember, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
     },
     updateList: async(req, res) => {
-        let id = req.params.id;
         let num = req.body.num2;
-
-
-
-        Listmember.findByIdAndUpdate(req.params.id, { count: num }, { new: true },
+        let pay = req.body.pay2;
+        await Listmember.findByIdAndUpdate(req.params.id, { count: num, pay: pay }, { new: true },
             (err) => {
                 if (err) return res.status(500).send(err);
                 return
@@ -196,16 +133,14 @@ module.exports = {
         );
         const list = await Cultivate.find();
         const listmember = await Listmember.find({ user: username });
-        res.redirect(req.get('referer'));
-        res.render('pages/member/listmember', { listmember, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        var check = 3;
+        res.render('pages/member/listmember', { check, listmember, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
 
 
     },
     deleteReport: async(req, res) => {
         let user = req.params.user;
-
-
-        Reportadmin.findByIdAndUpdate(req.params.id, { $pull: { username: { $in: [user] } } }, { new: true },
+        await Reportadmin.findByIdAndUpdate(req.params.id, { $pull: { username: { $in: [user] } } }, { new: true },
             (err) => {
                 if (err) return res.status(500).send(err);
                 return
@@ -232,8 +167,8 @@ module.exports = {
                 }
             }
         }
-        res.redirect(req.get('referer'));
-        res.render('pages/member/reportfrommember', { username, password, firstname, lastname, email, phone, birthday, province, district, doctype, mesh, mesb, mesi });
+        let test = 1;
+        res.render('pages/member/reportfrommember', { username, password, firstname, lastname, email, phone, birthday, province, district, doctype, mesh, mesb, mesi, test });
 
     },
     saveRecord: async(req, res) => {
@@ -250,34 +185,51 @@ module.exports = {
             detail: req.body.detail
         });
         // save to database
-        record.save();
-        res.redirect(req.get('referer'));
+        await record.save();
+
+        var check = 1;
+        const listmember = await Listmember.find({ user: username });
+        res.render('pages/member/record', { check, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
     },
     showRecord: async(req, res) => {
         var id = req.params.id;
         var product = req.params.product;
         const list = await Record.find({ idlist: id });
-
-
-        res.render('pages/member/showrecord', { product, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        var check = 0;
+        res.render('pages/member/showrecord', { id, check, product, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
 
     },
     editRecord: async(req, res) => {
-        Record.findByIdAndUpdate(req.params.id, req.body, { new: true },
+        await Record.findByIdAndUpdate(req.params.id, req.body, { new: true },
             (err) => {
-                if (err) return res.status(500).send(err);
-                return
+                if (err) {
+                    return res.status(500).send(err);
+                } else {
+                    return
+                }
             }
         );
-        res.redirect(req.get('referer'));
+        var id = req.params.id2;
+        var product = req.params.product;
+        const list = await Record.find({ idlist: id });
+        var check = 1;
+        res.render('pages/member/showrecord', { id, check, product, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
 
     },
     deleteRecord: async(req, res) => {
-        var id = req.params.id;
-        Record.findByIdAndRemove(id, (err) => {
+        var id0 = req.params.id;
+        await Record.findByIdAndRemove(id0, (err) => {
             if (err) return res.status(500).send(err);
-            return res.redirect(req.get('referer'));
+            return
         });
+        var id = req.params.id2;
+        var product = req.params.product;
+        const list = await Record.find({ idlist: id });
+        var check = 2;
+        res.render('pages/member/showrecord', { id, check, product, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
+
     },
     saveHarvest: async(req, res) => {
         var id = req.params.id;
@@ -294,33 +246,132 @@ module.exports = {
             detail: req.body.detail
         });
         // save to database
-        harvest.save();
-        res.redirect(req.get('referer'));
+        await harvest.save();
+        var check = 1;
+        const listmember = await Listmember.find({ user: username });
+        res.render('pages/member/harvest', { check, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
     },
     showHarvest: async(req, res) => {
         var id = req.params.id;
         var product = req.params.product;
         const list = await Harvest.find({ idlist: id });
-
-        res.render('pages/member/showharvest', { product, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        var check = 0;
+        res.render('pages/member/showharvest', { id, check, product, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
 
     },
     editHarvest: async(req, res) => {
-        Harvest.findByIdAndUpdate(req.params.id, req.body, { new: true },
+        await Harvest.findByIdAndUpdate(req.params.id, req.body, { new: true },
             (err) => {
                 if (err) return res.status(500).send(err);
                 return
             }
         );
-        res.redirect(req.get('referer'));
+        var id = req.params.id2;
+        var product = req.params.product;
+        const list = await Harvest.find({ idlist: id });
+        var check = 1;
+        res.render('pages/member/showharvest', { id, check, product, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
 
     },
     deleteHarvest: async(req, res) => {
-        var id = req.params.id;
-        Harvest.findByIdAndRemove(id, (err) => {
+        var id0 = req.params.id;
+        await Harvest.findByIdAndRemove(id0, (err) => {
             if (err) return res.status(500).send(err);
-            return res.redirect(req.get('referer'));
+            return
         });
+        var id = req.params.id2;
+        var product = req.params.product;
+        const list = await Harvest.find({ idlist: id });
+        var check = 2;
+        res.render('pages/member/showharvest', { id, check, product, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
+    },
+    showConclude: async(req, res) => {
+        var id = req.params.id;
+        var product = req.params.product;
+
+        const x = await Record.find({ idlist: id });
+        const y = await Harvest.find({ idlist: id });
+        const z = await Listmember.find({ _id: id });
+        if ((x.length == 0 && y.length == 0) || (x.length == 0 || y.length == 0)) {
+            const record = await Record.find({ username: username });
+            const harvest = await Harvest.find({ username: username });
+            const list = await Cultivate.find();
+            const listmember = await Listmember.find({ user: username });
+            var check = 1;
+            res.render('pages/member/conclude', { check, record, harvest, list, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        } else {
+            var n = z[0].count;
+            var pay = z[0].pay;
+            var dayO = new Date(x[0].date);
+            var dayN = new Date(y[y.length - 1].date);
+            let dateOld = dayO.toISOString().replace(/T/).substr(0, 10);
+            let dateNew = dayN.toISOString().replace(/T/).substr(0, 10);
+
+            let sum = 0;
+            let sum2 = 0;
+            for (let i = 0; i < x.length; i++) {
+                sum = sum + x[i].power + x[i].material;
+
+            }
+            for (let i = 0; i < y.length; i++) {
+                sum2 = sum2 + (y[i].num * y[i].price);
+                sum = sum + y[i].harvest;
+
+            }
+            sum = sum + (pay * n);
+            let fsum = sum / n;
+            let fsum2 = sum2 / n;
+            let fsum3 = sum2 - sum;
+            let fsum4 = fsum3 / n;
+            res.render('pages/member/showconclude', { sum, sum2, fsum, fsum2, fsum3, fsum4, dateNew, dateOld, product, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+
+        }
+    },
+    detailConclude: async(req, res) => {
+        var id = req.params.id;
+        var product = req.params.product;
+        const x = await Record.find({ idlist: id });
+        const y = await Harvest.find({ idlist: id });
+        const z = await Listmember.find({ _id: id });
+        if ((x.length == 0 && y.length == 0) || (x.length == 0 || y.length == 0)) {
+            const record = await Record.find({ username: username });
+            const harvest = await Harvest.find({ username: username });
+            const list = await Cultivate.find();
+            const listmember = await Listmember.find({ user: username });
+            var check = 1;
+            res.render('pages/member/conclude', { check, record, harvest, list, listmember, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        } else {
+            var n = z[0].count;
+            var dayO = new Date(x[0].date);
+            var dayN = new Date(y[y.length - 1].date);
+            let dateOld = dayO.toISOString().replace(/T/).substr(0, 10);
+            let dateNew = dayN.toISOString().replace(/T/).substr(0, 10);
+
+            let pow = 0;
+            let mat = 0;
+            let num = 0;
+            let sell = 0;
+            let pay = z[0].pay;
+            for (let i = 0; i < x.length; i++) {
+                pow = pow + x[i].power;
+                mat = mat + x[i].material;
+            }
+            for (let i = 0; i < y.length; i++) {
+                pow = pow + y[i].harvest;
+                num = num + y[i].num;
+                sell = sell + (y[i].num * y[i].price);
+            }
+            let fpow = pow / n;
+            let fmat = mat / n;
+            let fnum = num / n;
+            let fsell = sell / n;
+            let fpay = pay * n;
+
+            res.render('pages/member/detailconclude', { pay, fpay, pow, mat, num, sell, fpow, fmat, fnum, fsell, dateNew, dateOld, product, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
+        }
     }
 
 }

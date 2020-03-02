@@ -21,7 +21,7 @@ module.exports = {
         // save to database
         user.save();
 
-        res.render('pages/login');
+        res.render('pages/login', { check: '3' });
     }
 
 }

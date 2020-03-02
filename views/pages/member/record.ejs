@@ -91,7 +91,7 @@
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
         <div class="w3-container">
-            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <img src="/images/logo.png" alt="logo" width="200" height="200" />
             <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
@@ -101,7 +101,7 @@
         </div>
         <div class="w3-bar-block" style="margin-top: 20px;">
             <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
-            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิตแต่ละปี</a>
+            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิต</a>
             <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
             <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
             <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
@@ -186,7 +186,7 @@
                                                 <p>จำนวนไร่</p>
                                             </td>
                                             <td>
-                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="count" required>
+                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="count" min="0" onkeyup="this.value = minmax(this.value)" required>
                                             </td>
                                             <td>
                                                 <p>ไร่</p>
@@ -197,7 +197,7 @@
                                                 <p>ค่าแรงงาน</p>
                                             </td>
                                             <td>
-                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="power" required>
+                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="power" min="0" required>
                                             </td>
                                             <td>
                                                 <p>บาท</p>
@@ -208,7 +208,7 @@
                                                 <p>ค่าวัสดุ</p>
                                             </td>
                                             <td>
-                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="material" required>
+                                                <input type="number" style="margin-left: 20px;margin-right: 20px;" name="material" min="0" required>
                                             </td>
                                             <td>
                                                 <p>บาท</p>
@@ -241,15 +241,35 @@
 
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
+    var test;
+    let x = '<%= check %>';
+    if (x == '1') {
+        Swal.fire(
+            'สำเร็จ',
+            'บันทึกรายการเรียบร้อย',
+            'success'
+        )
+    }
+
+
     function add(id, num, user, product) {
         document.getElementById('hname').innerHTML = product;
+        test = num;
         $('#myModal').modal('show');
         document.getElementById("save").action = "/saveRecord/" + id + "/" + user;
     }
 
+    function minmax(value) {
+        if (parseInt(value) > test)
+            return test;
+        else return value;
+    }
+
     function show(id, product) {
-        window.location.href = 'showRecord/' + id + "/" + product;
+
+        window.location.href = '/showRecord/' + id + "/" + product;
 
     }
 </script>

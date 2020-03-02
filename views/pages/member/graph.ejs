@@ -22,6 +22,12 @@
         font-size: 16px;
     }
     
+    button {
+        border: none;
+        padding: 8px 28px;
+        cursor: pointer;
+    }
+    
     .dropbtn {
         background-color: #008CBA;
         color: white;
@@ -63,6 +69,20 @@
     .dropdown:hover .dropbtn {
         background-color: #006bb3;
     }
+    
+    #outerdiv {
+        width: 100%;
+        height: 700px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    #inneriframe {
+        position: absolute;
+        width: 900px;
+        height: 800px;
+        bottom: 180px;
+    }
 </style>
 
 <body>
@@ -70,7 +90,7 @@
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
         <div class="w3-container">
-            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <img src="/images/logo.png" alt="logo" width="200" height="200" />
             <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
@@ -80,7 +100,7 @@
         </div>
         <div class="w3-bar-block" style="margin-top: 20px;">
             <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
-            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิตแต่ละปี</a>
+            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิต</a>
             <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
             <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
             <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
@@ -97,18 +117,27 @@
 
         <!-- Header -->
         <div class="w3-container" style="margin-top:80px" id="showcase">
-            <h1 class="w3-jumbo" style="text-align: center;"><b>ราคาผลผลิตแต่ละปี</b></h1>
+            <h1 class="w3-jumbo" style="text-align: center;"><b>ราคาผลผลิตใน 15 วัน</b></h1>
 
         </div>
 
         <center>
             <div class="dropdown" style="margin-top: 20px;">
-                <button class="dropbtn" style="padding: 8px 55px;">พืชผลผลิต</button>
+                <button class="dropbtn" style="width: 500px; margin-bottom: 22px;" id="productname">พืชผลผลิต</button>
                 <div class="dropdown-content" style="width: 100%;">
-                    <a href="#">มะนาว</a>
-                    <a href="#">ข้าวโพด</a>
-                    <a href="#">ปาล์ม</a>
+                    <% for(var i =0 ; i< list.length ; i ++ ){%>
+                        <button style="width: 100%;" onclick="add('<%= list[i].name %>')">
+                            <%= list[i].name %>
+                        </button>
+                        <br>
+                        <%} %>
                 </div>
+            </div>
+        </center>
+        <center>
+            <div id='outerdiv'>
+                <iframe src="" id='inneriframe' scrolling=no style="left: 400px;"></iframe>
+
             </div>
         </center>
 
@@ -128,5 +157,32 @@
 
 
 </body>
+<script>
+    var product;
+
+    function add(name) {
+        product = name;
+        document.getElementById("productname").innerHTML = product;
+        if (product == 'อ้อยโรงงาน') {
+            document.getElementById("inneriframe").src = "https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%AD%E0%B9%89%E0%B8%AD%E0%B8%A2%E0%B9%82%E0%B8%A3%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89";
+        }
+        if (product == 'สับปะรดสีทองเบอร์ใหญ่') {
+            document.getElementById("inneriframe").src = "https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%AA%E0%B8%B1%E0%B8%9A%E0%B8%9B%E0%B8%B0%E0%B8%A3%E0%B8%94/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89";
+
+        }
+        if (product == 'น้ำยางพาราสด') {
+            document.getElementById("inneriframe").src = "https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%A2%E0%B8%B2%E0%B8%87%E0%B8%9E%E0%B8%B2%E0%B8%A3%E0%B8%B2/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89";
+
+        }
+        if (product == 'ผลปาล์มน้ำมัน') {
+            document.getElementById("inneriframe").src = "https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%9B%E0%B8%B2%E0%B8%A5%E0%B9%8C%E0%B8%A1%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89";
+
+        }
+        if (product == 'ข้าวเจ้า') {
+            document.getElementById("inneriframe").src = "https://www.kasetprice.com/%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2/%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A7%E0%B9%80%E0%B8%9B%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81/%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89";
+
+        }
+    }
+</script>
 
 </html>

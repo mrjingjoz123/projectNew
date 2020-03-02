@@ -54,7 +54,7 @@
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg, rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
         <div class="w3-container">
-            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <img src="/images/logo.png" alt="logo" width="200" height="200" />
             <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
@@ -117,48 +117,23 @@
             </table>
 
         </div>
-        <!-- <center>
-            <div class="w3-container">
-                <button style="margin-top: 30px;" onclick="document.getElementById('id01').style.display='block'">
-                    เพิ่มรายการเพาะปลูก
-                </button>
-            </div>
-
-        </center> -->
-
-        <!-- <div id="id01" class="w3-modal">
-            <div class="w3-modal-content">
-                <div class="w3-container">
-                    <center>
-                        <form action="/saveList" method="POST">
-                            <h3>เพิ่มรายการเพาะปลูก</h3>
-                            <p>ชื่อผลผลิต</p>
-                            <input type="text" style="width: 40%;" name="namelist" required>
-                            <p>ราคาผลผลิต</p>
-                            <input type="text" style="width: 40%;" name="price" required>
-                            <p>หน่วยของผลผลิต</p>
-                            <input type="text" style="width: 40%;" name="unit" required>
-                            <br>
-                            <button type="submit" style="margin-bottom: 20px;margin-top: 30px;">ยืนยัน</button>
-                            <button onclick="document.getElementById('id01').style.display='none'" type="button">ยกเลิก</button>
-                        </form>
-                    </center>
-                </div>
-            </div>
-        </div> -->
-
-
-
-
-
-
 
 
         <!-- End page content -->
     </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
+    let x = '<%= check %>';
+    if (x == '1') {
+        Swal.fire(
+            'สำเร็จ',
+            'ลบรายการเพาะปลูกเรียบร้อย',
+            'success'
+        )
+    }
+
     function deleteList(id) {
         window.location.href = '/deleteList/' + id
     }

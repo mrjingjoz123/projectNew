@@ -52,7 +52,7 @@
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg, rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
         <div class="w3-container">
-            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <img src="/images/logo.png" alt="logo" width="200" height="200" />
             <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
@@ -220,9 +220,26 @@
 
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
+    let x = '<%= check %>';
+    if (x == '1') {
+        Swal.fire(
+            'สำเร็จ',
+            'แก้ไขข้อมูลผู้ใช้สำเร็จ',
+            'success'
+        )
+    }
+    if (x == '2') {
+        Swal.fire(
+            'สำเร็จ',
+            'ลบข้อมูลผู้ใช้สำเร็จ',
+            'success'
+        )
+    }
+
     function deleteUser(id) {
-        window.location.href = '/deleteUser/' + id
+        window.location.href = '/deleteUser/' + id;
 
     }
 
@@ -252,7 +269,7 @@
         document.getElementById("Ibirthday").value = dateNow;
         document.getElementById("Iprovince").value = province;
         document.getElementById("Idistrict").value = district;
-        document.getElementById("IdSave").action = '/saveEditUser/' + id
+        document.getElementById("IdSave").action = '/saveEditUser/' + id;
         $('#myModal2').modal('show');
     }
 </script>

@@ -19,7 +19,7 @@
 
         <div class="wrap-register100">
             <div>
-                <img src="../images/logo.png" alt="logo" width="200" height="200" />
+                <img src="/images/logo.png" alt="logo" width="200" height="200" />
 
                 <div>
                     <span>  <b>สมัครสมาชิก</b></span>
@@ -28,15 +28,15 @@
                     <div style="padding-top: 30px;">
                         <label for="username">ชื่อผู้ใช้งาน</label>
                         <br>
-                        <input type="text" placeholder="กรอกชื่อผู้ใช้งาน" name="username" required>
+                        <input type="text" placeholder="กรอกชื่อผู้ใช้งาน" name="username" maxlength="10" min="4" required>
                         <br>
                         <label for="password">รหัสผ่าน</label>
                         <br>
-                        <input type="password" placeholder="กรอกรหัสผ่าน" name="password" id="password" required>
+                        <input type="password" placeholder="กรอกรหัสผ่าน" name="password" id="password" maxlength="12" min="4" required>
                         <br>
                         <label for="conpass">ยืนยันรหัสผ่าน</label>
                         <br>
-                        <input type="password" placeholder="กรอกรหัสผ่านอีกครั้ง" name="conpass" id="conpass" required>
+                        <input type="password" placeholder="กรอกรหัสผ่านอีกครั้ง" name="conpass" id="conpass" maxlength="12" min="4" required>
                         <br>
                         <label for="firstname">ชื่อจริง</label>
                         <br>
@@ -70,7 +70,7 @@
                             <button type="submit" class="register-form-save-btn">สมัครสมาชิก</button>
                         </div>
                         <div class="container-register-form-btn">
-                            <button type="button" onclick="window.history.back();" class="register-form-cancel-btn">ยกเลิก</button>
+                            <button type="button" onclick="back()" class="register-form-cancel-btn">ยกเลิก</button>
                         </div>
 
                     </div>
@@ -90,6 +90,10 @@
         } else {
             confirm_password.setCustomValidity('');
         }
+    }
+
+    function back() {
+        window.location.href = '/login'
     }
 
     password.onchange = validatePassword;

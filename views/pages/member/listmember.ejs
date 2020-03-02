@@ -91,7 +91,7 @@
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
         <div class="w3-container">
-            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <img src="/images/logo.png" alt="logo" width="200" height="200" />
             <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
@@ -101,7 +101,7 @@
         </div>
         <div class="w3-bar-block" style="margin-top: 20px;">
             <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
-            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิตแต่ละปี</a>
+            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิต</a>
             <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
             <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
             <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
@@ -129,6 +129,7 @@
                         <th>รายการที่</th>
                         <th>ชื่อผลผลิต</th>
                         <th>จำนวนไร่</th>
+                        <th>ค่าเช่าที่/ไร่</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -151,7 +152,12 @@
                                 </p>
                             </td>
                             <td>
-                                <button style="margin-right: 10px; background-color: #ff9900;color: white;margin-right: 3px;" onclick="editList('<%= listmember[i].id %>','<%= listmember[i].product %>','<%= listmember[i].count %>')">แก้ไข</button>
+                                <p>
+                                    <%= listmember[i].pay %>
+                                </p>
+                            </td>
+                            <td>
+                                <button style="margin-right: 10px; background-color: #ff9900;color: white;margin-right: 3px;" onclick="editList('<%= listmember[i].id %>','<%= listmember[i].product %>','<%= listmember[i].count %>','<%= listmember[i].pay %>')">แก้ไข</button>
                                 <button onclick="deleteList('<%= listmember[i].id %>')" style="background-color: #f44336;color:white;">ลบ</button>
                             </td>
                         </tr>
@@ -195,7 +201,9 @@
                             <p>จำนวนไร่ที่ใช้ปลูก</p>
                             <input type="text" style="width: 40%;" name="num" required>
                             <br>
-
+                            <p>ค่าเช่าที่ดิน/ไร่</p>
+                            <input type="text" style="width: 40%;" name="pay" required>
+                            <br>
                             <div class="modal-footer">
                                 <button onclick="saveList('<%= username %>');" style="margin-bottom: 20px;margin-top: 30px;background-color: #4CAF50;color:white;">ยืนยัน</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
@@ -212,27 +220,18 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <center>
-
                         <h3>แก้ไขรายการเพาะปลูก</h3>
-                        <p>ท่านต้องการปลูกอะไร</p>
 
-                        <div class="dropdown" style="margin-top: 20px;">
-                            <button class="dropbtn" style="width: 500px; margin-bottom: 22px;" id="productname2">พืชผลผลิต</button>
-                            <div class="dropdown-content" style="width: 100%;">
-                                <% for(var i =0 ; i< list.length ; i ++ ){%>
-                                    <button style="width: 100%;" onclick="addEdit('<%= list[i].name %>')">
-                                            <%= list[i].name %>
-                                        </button>
-                                    <br>
-                                    <%} %>
-                            </div>
-                        </div>
+                        <p style="width: 500px; margin-bottom: 22px;" id="productname2">พืชผลผลิต</p>
+
                         <form id="uplist" action="nothing.asp" method="POST">
                             <div class="modal-body">
                                 <p>จำนวนไร่ที่ใช้ปลูก</p>
                                 <input type="text" style="width: 40%;" name="num2" id="num2" required>
                                 <br>
-
+                                <p>ค่าเช่าที่ดิน/ไร่</p>
+                                <input type="text" style="width: 40%;" name="pay2" id="pay2" required>
+                                <br>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-default" style="background-color: #4CAF50;color:white;">บันทึก</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
@@ -255,8 +254,31 @@
 
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
     let product;
+    let x = '<%= check %>';
+    if (x == '1') {
+        Swal.fire(
+            'สำเร็จ',
+            'บันทึกรายการเพาะปลูกเรียบร้อย',
+            'success'
+        )
+    }
+    if (x == '2') {
+        Swal.fire(
+            'สำเร็จ',
+            'ลบรายการเพาะปลูกเรียบร้อย',
+            'success'
+        )
+    }
+    if (x == '3') {
+        Swal.fire(
+            'สำเร็จ',
+            'แก้ไขรายการเพาะปลูกเรียบร้อย',
+            'success'
+        )
+    }
 
     function addListmember() {
         $('#myModal').modal('show');
@@ -267,26 +289,21 @@
         document.getElementById("productname").innerHTML = product;
     }
 
-    function addEdit(name) {
-        product = name;
-        document.getElementById("productname2").innerHTML = product;
-    }
 
     function saveList(uname) {
         document.getElementById("myForm").action = "/saveList/" + uname + "/" + product;
     }
 
-    function editList(id, pname, count) {
+    function editList(id, pname, count, pay) {
         document.getElementById("productname2").innerHTML = pname;
         document.getElementById("num2").value = count;
+        document.getElementById("pay2").value = pay;
         document.getElementById("uplist").action = "/updateList/" + id;
         $('#myModal2').modal('show');
     }
 
-
     function deleteList(id) {
         window.location.href = '/deleteListmember/' + id
-
     }
 </script>
 

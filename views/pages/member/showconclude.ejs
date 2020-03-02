@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Report</title>
+<title>ShowRecord</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -118,67 +118,119 @@
 
         <!-- Header -->
         <div class="w3-container" style="margin-top:80px" id="showcase">
-            <h1 class="w3-jumbo" style="text-align: center;"><b>แจ้งเตือน</b></h1>
+            <h1 class="w3-jumbo" style="text-align: center;"><b>รายการบันทึกค่าใช้จ่าย</b></h1>
 
         </div>
 
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ลำดับที่</th>
-                        <th>หัวข้อ</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% for(var i =0 ; i< mesh.length ; i ++ ){%>
+            <h2 style="text-align: center;">
+                <%= product %>
+            </h2>
+            <span>
+                <%= dateOld %>
+            </span>
+            <span>
+                ถึง
+            </span>
+            <span id="dd">
+                <%= dateNew %>
+            </span>
+            <div style="margin-top: 40px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <tr>
                             <td>
-                                <%= i + 1  %>
+                                <p>ต้นทุนรวม</p>
                             </td>
                             <td>
-                                <%= mesh[i] %>
+                                <p>
+                                    <%= sum.toFixed(2) %>
+                                </p>
                             </td>
                             <td>
-                                <button style="margin-right: 10px;background-color: #4CAF50;color:white;" onclick="readMes('<%= mesh[i] %>','<%= mesb[i] %>')">อ่าน</button>
-                                <button onclick="deleteMes('<%= mesi[i] %>','<%= username %>')" style="background-color: #f44336;color:white;">ลบ</button>
+                                <p>บาท</p>
                             </td>
                         </tr>
-                        <%} %>
-                </tbody>
-            </table>
-        </div>
+                        <tr>
+                            <td>
+                                <p></p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= fsum.toFixed(2) %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>บาท/ไร่</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>รายได้</p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= sum2.toFixed(2) %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>บาท</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p></p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= fsum2.toFixed(2) %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>บาท/ไร่</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>กำไร/ขาดทุน</p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= fsum3.toFixed(2) %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>บาท</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p></p>
+                            </td>
+                            <td>
+                                <p>
+                                    <%= fsum4.toFixed(2) %>
+                                </p>
+                            </td>
+                            <td>
+                                <p>บาท/ไร่</p>
+                            </td>
+                        </tr>
 
-
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">จดหมาย</h4>
-                            <label>จาก</label>
-                            <label>ผู้ดูแลระบบ</label>
-                    </div>
-                    <div class="modal-body">
-                        <h4 id="headname"></h4>
-
-                        <p id="bodytext"></p>
-                        <br>
-                    </div>
-                    <div class="modal-footer">
-
-                        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
-                    </div>
+                    </tbody>
+                </table>
+                <div style="margin-top: 30px; text-align: center;"><button style="margin-right: 10px;background-color: #008CBA; ;color:white;margin-right: 3px;" onclick="back()">กลับ</button>
                 </div>
-
             </div>
+
         </div>
-
-
-
-
 
 
         <!-- End page content -->
@@ -188,27 +240,9 @@
 
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    let x = '<%= test %>';
-    if (x == '1') {
-        Swal.fire(
-            'สำเร็จ',
-            'ลบรายการเรียบร้อย',
-            'success'
-        )
-    }
-
-    function deleteMes(id, user) {
-        window.location.href = '/deleteReportmember/' + id + '/' + user;
-
-    }
-
-    function readMes(headname, bodytext) {
-        document.getElementById("headname").innerHTML = headname;
-        document.getElementById("bodytext").innerHTML = bodytext;
-
-        $('#myModal').modal('show');
+    function back() {
+        window.location.href = "/conclude"
     }
 </script>
 

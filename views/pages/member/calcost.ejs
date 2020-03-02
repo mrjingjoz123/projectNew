@@ -91,7 +91,7 @@
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
         <div class="w3-container">
-            <img src="../images/logo.png" alt="logo" width="200" height="200" />
+            <img src="/images/logo.png" alt="logo" width="200" height="200" />
             <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
@@ -101,7 +101,7 @@
         </div>
         <div class="w3-bar-block" style="margin-top: 20px;">
             <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
-            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิตแต่ละปี</a>
+            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิต</a>
             <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
             <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
             <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
@@ -351,54 +351,55 @@
             console.log(pnum)
             $('#myModal').modal('show');
             if (product == 'อ้อยโรงงาน') {
-                document.getElementById("cost").value = Number(p + m + r);
-                document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum);
-                document.getElementById("income2").value = Number((h * pnum) / n);
-                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
-                document.getElementById("official").value = Number(10482.13 * n);
-                document.getElementById("official2").value = Number(10482.13);
+                document.getElementById("cost").value = Comma(Number(p + m + r).toFixed(2));
+                document.getElementById("cost2").value = Comma(Number((p + m + r) / n).toFixed(2));
+                document.getElementById("income").value = Comma(Number(h * pnum).toFixed(2));
+                document.getElementById("income2").value = Comma(Number((h * pnum) / n).toFixed(2));
+                document.getElementById("profit").value = Comma(Number((h * pnum) - (p + m + r)).toFixed(2));
+                document.getElementById("profit2").value = Comma(Number(((h * pnum) - (p + m + r)) / n).toFixed(2));
+                document.getElementById("official").value = Comma(Number(10482.13 * n).toFixed(2));
+                document.getElementById("official2").value = Comma(Number(10482.13).toFixed(2));
+
             }
             if (product == 'สับปะรดสีทองเบอร์ใหญ่') {
-                document.getElementById("cost").value = Number(p + m + r);
-                document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum);
-                document.getElementById("income2").value = Number((h * pnum) / n);
-                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
-                document.getElementById("official").value = Number(17529.10 * n);
-                document.getElementById("official2").value = Number(17529.10);
+                document.getElementById("cost").value = Comma(Number(p + m + r).toFixed(2));
+                document.getElementById("cost2").value = Comma(Number((p + m + r) / n).toFixed(2));
+                document.getElementById("income").value = Comma(Number(h * pnum).toFixed(2));
+                document.getElementById("income2").value = Comma(Number((h * pnum) / n).toFixed(2));
+                document.getElementById("profit").value = Comma(Number((h * pnum) - (p + m + r)).toFixed(2));
+                document.getElementById("profit2").value = Comma(Number(((h * pnum) - (p + m + r)) / n).toFixed(2));
+                document.getElementById("official").value = Comma(Number(17529.10 * n).toFixed(2));
+                document.getElementById("official2").value = Comma(Number(17529.10).toFixed(2));
             }
             if (product == 'น้ำยางพาราสด') {
-                document.getElementById("cost").value = Number(p + m + r);
-                document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum);
-                document.getElementById("income2").value = Number((h * pnum) / n);
-                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
-                document.getElementById("official").value = Number(14230.32 * n);
-                document.getElementById("official2").value = Number(14230.32);
+                document.getElementById("cost").value = Comma(Number(p + m + r).toFixed(2));
+                document.getElementById("cost2").value = Comma(Number((p + m + r) / n).toFixed(2));
+                document.getElementById("income").value = Comma(Number(h * pnum).toFixed(2));
+                document.getElementById("income2").value = Comma(Number((h * pnum) / n).toFixed(2));
+                document.getElementById("profit").value = Comma(Number((h * pnum) - (p + m + r)).toFixed(2));
+                document.getElementById("profit2").value = Comma(Number(((h * pnum) - (p + m + r)) / n).toFixed(2));
+                document.getElementById("official").value = Comma(Number(14230.32 * n).toFixed(2));
+                document.getElementById("official2").value = Comma(Number(14230.32).toFixed(2));
             }
             if (product == 'ผลปาล์มน้ำมัน') {
-                document.getElementById("cost").value = Number(p + m + r);
-                document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum);
-                document.getElementById("income2").value = Number((h * pnum) / n);
-                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
-                document.getElementById("official").value = Number(7459.07 * n);
-                document.getElementById("official2").value = Number(7459.07);
+                document.getElementById("cost").value = Comma(Number(p + m + r).toFixed(2));
+                document.getElementById("cost2").value = Comma(Number((p + m + r) / n).toFixed(2));
+                document.getElementById("income").value = Comma(Number(h * pnum).toFixed(2));
+                document.getElementById("income2").value = Comma(Number((h * pnum) / n).toFixed(2));
+                document.getElementById("profit").value = Comma(Number((h * pnum) - (p + m + r)).toFixed(2));
+                document.getElementById("profit2").value = Comma(Number(((h * pnum) - (p + m + r)) / n).toFixed(2));
+                document.getElementById("official").value = Comma(Number(7459.07 * n).toFixed(2));
+                document.getElementById("official2").value = Comma(Number(7459.07).toFixed(2));
             }
             if (product == 'ข้าวเจ้า') {
-                document.getElementById("cost").value = Number(p + m + r);
-                document.getElementById("cost2").value = Number((p + m + r) / n);
-                document.getElementById("income").value = Number(h * pnum);
-                document.getElementById("income2").value = Number((h * pnum) / n);
-                document.getElementById("profit").value = Number((h * pnum) - (p + m + r));
-                document.getElementById("profit2").value = Number(((h * pnum) - (p + m + r)) / n);
-                document.getElementById("official").value = Number(3968.21 * n);
-                document.getElementById("official2").value = Number(3968.21);
+                document.getElementById("cost").value = Comma(Number(p + m + r).toFixed(2));
+                document.getElementById("cost2").value = Comma(Number((p + m + r) / n).toFixed(2));
+                document.getElementById("income").value = Comma(Number(h * pnum).toFixed(2));
+                document.getElementById("income2").value = Comma(Number((h * pnum) / n).toFixed(2));
+                document.getElementById("profit").value = Comma(Number((h * pnum) - (p + m + r)).toFixed(2));
+                document.getElementById("profit2").value = Comma(Number(((h * pnum) - (p + m + r)) / n).toFixed(2));
+                document.getElementById("official").value = Comma(Number(3968.21 * n).toFixed(2));
+                document.getElementById("official2").value = Comma(Number(3968.21).toFixed(2));
 
             }
         }
@@ -426,8 +427,21 @@
         if (name == 'ข้าวเจ้า') {
             document.getElementById("unit").innerHTML = 'ตัน';
         }
-        document.getElementById("productname").innerHTML = product + ' จำนวน ' + count;
+        document.getElementById("productname").innerHTML = product + ' จำนวน ' + count + 'ไร่';
 
+    }
+
+    function Comma(Num) {
+        Num += '';
+        Num = Num.replace(/,/g, '');
+
+        x = Num.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1))
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        return x1 + x2;
     }
 </script>
 

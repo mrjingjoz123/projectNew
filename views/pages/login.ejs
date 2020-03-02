@@ -17,7 +17,7 @@
     <div class="container-login100">
         <div class="wrap-login100" style="text-align: center;">
             <div class="login100-pic">
-                <img src="../images/logo.png" alt="logo" width="200" height="200" />
+                <img src="/images/logo.png" alt="logo" width="200" height="200" />
                 <span class="login100-form-logo">
                     <b>
                     ระบบวิเคราะห์การเกษตร
@@ -63,7 +63,34 @@
         </div>
     </div>
 
+
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+    let x = '<%= check %>';
+
+    if (x == '1') {
+        Swal.fire(
+            'เกิดข้อผิดพลาด',
+            'รหัสผ่านไม่ถูกต้อง',
+            'error'
+        )
+    }
+    if (x == '2') {
+        Swal.fire(
+            'เกิดข้อผิดพลาด',
+            'ไม่พบชื่อผู้ใช้ในระบบ',
+            'error'
+        )
+    }
+    if (x == '3') {
+        Swal.fire(
+            'สำเร็จ',
+            'สมัครสมาชิกสำเร็จ',
+            'success'
+        )
+    }
+</script>
 
 
 </html>

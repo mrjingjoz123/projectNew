@@ -14,6 +14,10 @@ const ListmemberModel = new Schema({
     user: {
         type: String,
         require: true
+    },
+    pay: {
+        type: Number,
+        require: true
     }
 });
 
