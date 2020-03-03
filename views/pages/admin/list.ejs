@@ -10,6 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+
+
 <style>
     body,
     h1,
@@ -48,79 +50,90 @@
 
 
 <body>
+    <%               
+    function Comma(Num) {
+        Num += '';
+        Num = Num.replace(/,/g, '');
+
+        x = Num.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1))
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        return x1 + x2;
+    }
+    %>
 
 
-
-    <!-- Sidebar/menu -->
-    <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg, rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
-        <div class="w3-container">
-            <img src="/images/logo.png" alt="logo" width="200" height="200" />
-            <h4><b>
+        <!-- Sidebar/menu -->
+        <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg, rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
+            <div class="w3-container">
+                <img src="/images/logo.png" alt="logo" width="200" height="200" />
+                <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
                 ภาคตะวันออก
                </b>
-            </h4>
-        </div>
-        <div class="w3-bar-block w3-padding-64">
-            <a href="/home" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
-            <a href="/list" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
-            <a href="/contact" class="w3-bar-item w3-button w3-hover-white">ติดต่อสมาชิก</a>
-            <a href="/report" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
-            <a href="/manager" class="w3-bar-item w3-button w3-hover-white">จัดการผู้ใช้งาน</a>
-            <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
-        </div>
-    </nav>
+                </h4>
+            </div>
+            <div class="w3-bar-block w3-padding-64">
+                <a href="/home" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
+                <a href="/list" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
+                <a href="/contact" class="w3-bar-item w3-button w3-hover-white">ติดต่อสมาชิก</a>
+                <a href="/report" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
+                <a href="/manager" class="w3-bar-item w3-button w3-hover-white">จัดการผู้ใช้งาน</a>
+                <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
+            </div>
+        </nav>
 
-    <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-        <!-- Header -->
-        <div class="w3-container" style="margin-top:80px" id="showcase">
-            <h1 class="w3-jumbo" style="text-align: center;"><b>รายการเพาะปลูก</b></h1>
+            <!-- Header -->
+            <div class="w3-container" style="margin-top:80px" id="showcase">
+                <h1 class="w3-jumbo" style="text-align: center;"><b>รายการเพาะปลูก</b></h1>
 
-        </div>
-        <div>
+            </div>
+            <div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>รายการที่</th>
-                        <th>ชื่อผลผลิต</th>
-                        <th>ราคาผลผลิต</th>
-                        <th>หน่วยของผลผลิต</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    <% for(var i =0 ; i< list.length ; i ++ ){%>
-
+                <table>
+                    <thead>
                         <tr>
-                            <td>
-                                <%= i + 1  %>
-                            </td>
-                            <td>
-                                <%= list[i].name %>
-                            </td>
-                            <td>
-                                <%= list[i].price %>
-                            </td>
-                            <td>
-                                <%= list[i].unit %>
-                            </td>
-                            <td><button onclick="deleteList('<%= list[i].id %>')" style="background-color: #f44336;color:white;">ลบ</button></td>
+                            <th>รายการที่</th>
+                            <th>ชื่อผลผลิต</th>
+                            <th>ราคาผลผลิต</th>
+                            <th>หน่วยของผลผลิต</th>
+                            <th></th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i =0 ; i< list.length ; i ++ ){%>
 
-                        <%} %>
-                </tbody>
-            </table>
+                            <tr>
+                                <td>
+                                    <%= i + 1  %>
+                                </td>
+                                <td>
+                                    <%= list[i].name %>
+                                </td>
+                                <td>
+                                    <%= Comma(list[i].price) %>
+                                </td>
+                                <td>
+                                    <%= list[i].unit %>
+                                </td>
+                                <td><button onclick="deleteList('<%= list[i].id %>')" style="background-color: #f44336;color:white;">ลบ</button></td>
+                            </tr>
+                            <%} %>
+                    </tbody>
+                </table>
 
+            </div>
+
+
+            <!-- End page content -->
         </div>
-
-
-        <!-- End page content -->
-    </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -134,8 +147,22 @@
         )
     }
 
+
     function deleteList(id) {
-        window.location.href = '/deleteList/' + id
+        Swal.fire({
+            title: 'คุณแน่ใจใช่ไหม?',
+            text: "คุณยืนยันที่จะลบใช่หรือไม่",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#f44336',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = '/deleteList/' + id
+            }
+        })
     }
 </script>
 

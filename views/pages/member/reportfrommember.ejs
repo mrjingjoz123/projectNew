@@ -200,8 +200,20 @@
     }
 
     function deleteMes(id, user) {
-        window.location.href = '/deleteReportmember/' + id + '/' + user;
-
+        Swal.fire({
+            title: 'คุณแน่ใจใช่ไหม?',
+            text: "คุณยืนยันที่จะลบใช่หรือไม่",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#f44336',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = '/deleteReportmember/' + id + '/' + user;
+            }
+        })
     }
 
     function readMes(headname, bodytext) {

@@ -87,168 +87,182 @@
 </style>
 
 <body>
+    <%               
+    function Comma(Num) {
+        Num += '';
+        Num = Num.replace(/,/g, '');
 
-    <!-- Sidebar/menu -->
-    <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
-        <div class="w3-container">
-            <img src="/images/logo.png" alt="logo" width="200" height="200" />
-            <h4><b>
+        x = Num.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1))
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        return x1 + x2;
+    }
+    %>
+
+        <!-- Sidebar/menu -->
+        <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
+            <div class="w3-container">
+                <img src="/images/logo.png" alt="logo" width="200" height="200" />
+                <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
                 ภาคตะวันออก
                </b>
-            </h4>
-        </div>
-        <div class="w3-bar-block" style="margin-top: 20px;">
-            <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
-            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิต</a>
-            <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
-            <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
-            <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
-            <a href="/harvest" class="w3-bar-item w3-button w3-hover-white">เก็บเกี่ยว</a>
-            <a href="/conclude" class="w3-bar-item w3-button w3-hover-white">สรุป</a>
-            <a href="/reportfrommember" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
-            <a href="/contactfrommember" class="w3-bar-item w3-button w3-hover-white">ติดต่อผู้ดูแลระบบ</a>
-            <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
-        </div>
-    </nav>
+                </h4>
+            </div>
+            <div class="w3-bar-block" style="margin-top: 20px;">
+                <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
+                <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิต</a>
+                <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
+                <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
+                <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
+                <a href="/harvest" class="w3-bar-item w3-button w3-hover-white">เก็บเกี่ยว</a>
+                <a href="/conclude" class="w3-bar-item w3-button w3-hover-white">สรุป</a>
+                <a href="/reportfrommember" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
+                <a href="/contactfrommember" class="w3-bar-item w3-button w3-hover-white">ติดต่อผู้ดูแลระบบ</a>
+                <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
+            </div>
+        </nav>
 
-    <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-        <!-- Header -->
-        <div class="w3-container" style="margin-top:80px" id="showcase">
-            <h1 class="w3-jumbo" style="text-align: center;"><b>รายการเพาะปลูก</b></h1>
+            <!-- Header -->
+            <div class="w3-container" style="margin-top:80px" id="showcase">
+                <h1 class="w3-jumbo" style="text-align: center;"><b>รายการเพาะปลูก</b></h1>
 
-        </div>
-        <div>
+            </div>
+            <div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>รายการที่</th>
-                        <th>ชื่อผลผลิต</th>
-                        <th>จำนวนไร่</th>
-                        <th>ค่าเช่าที่/ไร่</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% for(var i =0 ; i< listmember.length ; i ++ ){%>
+                <table>
+                    <thead>
                         <tr>
-                            <td>
-                                <p>
-                                    <%= i + 1 %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= listmember[i].product %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= listmember[i].count %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= listmember[i].pay %>
-                                </p>
-                            </td>
-                            <td>
-                                <button style="margin-right: 10px; background-color: #ff9900;color: white;margin-right: 3px;" onclick="editList('<%= listmember[i].id %>','<%= listmember[i].product %>','<%= listmember[i].count %>','<%= listmember[i].pay %>')">แก้ไข</button>
-                                <button onclick="deleteList('<%= listmember[i].id %>')" style="background-color: #f44336;color:white;">ลบ</button>
-                            </td>
+                            <th>รายการที่</th>
+                            <th>ชื่อผลผลิต</th>
+                            <th>จำนวนไร่</th>
+                            <th>ค่าเช่าที่/ไร่</th>
+                            <th></th>
                         </tr>
-                        <%} %>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <% for(var i =0 ; i< listmember.length ; i ++ ){%>
+                            <tr>
+                                <td>
+                                    <p>
+                                        <%= i + 1 %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= listmember[i].product %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= Comma(listmember[i].count) %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= Comma(listmember[i].pay) %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <button style="margin-right: 10px; background-color: #ff9900;color: white;margin-right: 3px;" onclick="editList('<%= listmember[i].id %>','<%= listmember[i].product %>','<%= listmember[i].count %>','<%= listmember[i].pay %>')">แก้ไข</button>
+                                    <button onclick="deleteList('<%= listmember[i].id %>')" style="background-color: #f44336;color:white;">ลบ</button>
+                                </td>
+                            </tr>
+                            <%} %>
+                    </tbody>
+                </table>
 
-        </div>
+            </div>
 
 
-        <center>
-            <div class="w3-container">
-                <button style="margin-top: 30px;background-color: #008CBA;color:white;" onclick="addListmember()">
+            <center>
+                <div class="w3-container">
+                    <button style="margin-top: 30px;background-color: #008CBA;color:white;" onclick="addListmember()">
                     เพิ่มรายการเพาะปลูก
                 </button>
-            </div>
+                </div>
 
-        </center>
+            </center>
 
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <center>
-                        <form id="myForm" action="nothing.asp" method="POST">
-                            <h3>เพิ่มรายการเพาะปลูก</h3>
-                            <p>ท่านต้องการปลูกอะไร</p>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <center>
+                            <form id="myForm" action="nothing.asp" method="POST">
+                                <h3>เพิ่มรายการเพาะปลูก</h3>
+                                <p>ท่านต้องการปลูกอะไร</p>
 
-                            <div class="dropdown" style="margin-top: 20px;">
-                                <button class="dropbtn" style="width: 500px; margin-bottom: 22px;" id="productname">พืชผลผลิต</button>
-                                <div class="dropdown-content" style="width: 100%;">
-                                    <% for(var i =0 ; i< list.length ; i ++ ){%>
-                                        <button style="width: 100%;" onclick="add('<%= list[i].name %>')">
+                                <div class="dropdown" style="margin-top: 20px;">
+                                    <button class="dropbtn" style="width: 500px; margin-bottom: 22px;" id="productname">พืชผลผลิต</button>
+                                    <div class="dropdown-content" style="width: 100%;">
+                                        <% for(var i =0 ; i< list.length ; i ++ ){%>
+                                            <button style="width: 100%;" onclick="add('<%= list[i].name %>')">
                                             <%= list[i].name %>
                                         </button>
-                                        <br>
-                                        <%} %>
+                                            <br>
+                                            <%} %>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <p>จำนวนไร่ที่ใช้ปลูก</p>
-                            <input type="text" style="width: 40%;" name="num" required>
-                            <br>
-                            <p>ค่าเช่าที่ดิน/ไร่</p>
-                            <input type="text" style="width: 40%;" name="pay" required>
-                            <br>
-                            <div class="modal-footer">
-                                <button onclick="saveList('<%= username %>');" style="margin-bottom: 20px;margin-top: 30px;background-color: #4CAF50;color:white;">ยืนยัน</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
-                            </div>
-                        </form>
-                    </center>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade" id="myModal2" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <center>
-                        <h3>แก้ไขรายการเพาะปลูก</h3>
-
-                        <p style="width: 500px; margin-bottom: 22px;" id="productname2">พืชผลผลิต</p>
-
-                        <form id="uplist" action="nothing.asp" method="POST">
-                            <div class="modal-body">
                                 <p>จำนวนไร่ที่ใช้ปลูก</p>
-                                <input type="text" style="width: 40%;" name="num2" id="num2" required>
+                                <input type="text" style="width: 40%;" name="num" required>
                                 <br>
                                 <p>ค่าเช่าที่ดิน/ไร่</p>
-                                <input type="text" style="width: 40%;" name="pay2" id="pay2" required>
+                                <input type="text" style="width: 40%;" name="pay" required>
                                 <br>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-default" style="background-color: #4CAF50;color:white;">บันทึก</button>
+                                    <button onclick="saveList('<%= username %>');" style="margin-bottom: 20px;margin-top: 30px;background-color: #4CAF50;color:white;">ยืนยัน</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
                                 </div>
-                            </div>
-                        </form>
-                    </center>
+                            </form>
+                        </center>
+                    </div>
                 </div>
             </div>
+
+
+            <div class="modal fade" id="myModal2" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <center>
+                            <h3>แก้ไขรายการเพาะปลูก</h3>
+
+                            <p style="width: 500px; margin-bottom: 22px;" id="productname2">พืชผลผลิต</p>
+
+                            <form id="uplist" action="nothing.asp" method="POST">
+                                <div class="modal-body">
+                                    <p>จำนวนไร่ที่ใช้ปลูก</p>
+                                    <input type="text" style="width: 40%;" name="num2" id="num2" required>
+                                    <br>
+                                    <p>ค่าเช่าที่ดิน/ไร่</p>
+                                    <input type="text" style="width: 40%;" name="pay2" id="pay2" required>
+                                    <br>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-default" style="background-color: #4CAF50;color:white;">บันทึก</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color: #f44336;color:white;">ปิด</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- End page content -->
         </div>
-
-
-
-
-
-        <!-- End page content -->
-    </div>
 
 
 
@@ -303,7 +317,21 @@
     }
 
     function deleteList(id) {
-        window.location.href = '/deleteListmember/' + id
+        Swal.fire({
+            title: 'คุณแน่ใจใช่ไหม?',
+            text: "คุณยืนยันที่จะลบใช่หรือไม่",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#f44336',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = '/deleteListmember/' + id
+            }
+        })
+
     }
 </script>
 

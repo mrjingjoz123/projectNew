@@ -87,154 +87,168 @@
 </style>
 
 <body>
+    <%               
+    function Comma(Num) {
+        Num += '';
+        Num = Num.replace(/,/g, '');
 
-    <!-- Sidebar/menu -->
-    <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
-        <div class="w3-container">
-            <img src="/images/logo.png" alt="logo" width="200" height="200" />
-            <h4><b>
+        x = Num.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1))
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        return x1 + x2;
+    }
+    %>
+
+        <!-- Sidebar/menu -->
+        <nav class="w3-sidebar  w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold; background: -webkit-linear-gradient(-135deg,  rgb(214, 121, 240), #8799f1);" id="mySidebar"><br>
+            <div class="w3-container">
+                <img src="/images/logo.png" alt="logo" width="200" height="200" />
+                <h4><b>
                 ระบบวิเคราะห์การเกษตร
                 <br>
                 ภาคตะวันออก
                </b>
-            </h4>
-        </div>
-        <div class="w3-bar-block" style="margin-top: 20px;">
-            <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
-            <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิต</a>
-            <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
-            <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
-            <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
-            <a href="/harvest" class="w3-bar-item w3-button w3-hover-white">เก็บเกี่ยว</a>
-            <a href="/conclude" class="w3-bar-item w3-button w3-hover-white">สรุป</a>
-            <a href="/reportfrommember" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
-            <a href="/contactfrommember" class="w3-bar-item w3-button w3-hover-white">ติดต่อผู้ดูแลระบบ</a>
-            <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
-        </div>
-    </nav>
+                </h4>
+            </div>
+            <div class="w3-bar-block" style="margin-top: 20px;">
+                <a href="/homemember" class="w3-bar-item w3-button w3-hover-white">หน้าหลัก</a>
+                <a href="/graph" class="w3-bar-item w3-button w3-hover-white">ราคาผลผลิต</a>
+                <a href="/listmember" class="w3-bar-item w3-button w3-hover-white">รายการเพาะปลูก</a>
+                <a href="/calcost" class="w3-bar-item w3-button w3-hover-white">คำนวณต้นทุน</a>
+                <a href="/record" class="w3-bar-item w3-button w3-hover-white">บันทึกค่าใช้จ่าย</a>
+                <a href="/harvest" class="w3-bar-item w3-button w3-hover-white">เก็บเกี่ยว</a>
+                <a href="/conclude" class="w3-bar-item w3-button w3-hover-white">สรุป</a>
+                <a href="/reportfrommember" class="w3-bar-item w3-button w3-hover-white">แจ้งเตือน</a>
+                <a href="/contactfrommember" class="w3-bar-item w3-button w3-hover-white">ติดต่อผู้ดูแลระบบ</a>
+                <a href="/login" class="w3-bar-item w3-button w3-hover-white">ออกจากระบบ</a>
+            </div>
+        </nav>
 
-    <!-- !PAGE CONTENT! -->
-    <div class="w3-main" style="margin-left:340px;margin-right:40px">
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-        <!-- Header -->
-        <div class="w3-container" style="margin-top:80px" id="showcase">
-            <h1 class="w3-jumbo" style="text-align: center;"><b>รายการบันทึกค่าใช้จ่าย</b></h1>
+            <!-- Header -->
+            <div class="w3-container" style="margin-top:80px" id="showcase">
+                <h1 class="w3-jumbo" style="text-align: center;"><b>รายการบันทึกค่าใช้จ่าย</b></h1>
 
-        </div>
-
-        <div>
-            <h2 style="text-align: center;">
-                <%= product %>
-            </h2>
-            <span>
-                <%= dateOld %>
-            </span>
-            <span>
-                ถึง
-            </span>
-            <span id="dd">
-                <%= dateNew %>
-            </span>
-            <div style="margin-top: 40px;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <p>ต้นทุนรวม</p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= sum.toFixed(2) %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>บาท</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p></p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= fsum.toFixed(2) %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>บาท/ไร่</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>รายได้</p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= sum2.toFixed(2) %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>บาท</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p></p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= fsum2.toFixed(2) %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>บาท/ไร่</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p>กำไร/ขาดทุน</p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= fsum3.toFixed(2) %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>บาท</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p></p>
-                            </td>
-                            <td>
-                                <p>
-                                    <%= fsum4.toFixed(2) %>
-                                </p>
-                            </td>
-                            <td>
-                                <p>บาท/ไร่</p>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-                <div style="margin-top: 30px; text-align: center;"><button style="margin-right: 10px;background-color: #008CBA; ;color:white;margin-right: 3px;" onclick="back()">กลับ</button>
-                </div>
             </div>
 
+            <div>
+                <h2 style="text-align: center;">
+                    <%= product %>
+                </h2>
+                <span>
+                <%= dateOld %>
+            </span>
+                <span>
+                ถึง
+            </span>
+                <span id="dd">
+                <%= dateNew %>
+            </span>
+                <div style="margin-top: 40px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p>ต้นทุนรวม</p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= Comma(sum.toFixed(2)) %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>บาท</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= Comma(fsum.toFixed(2)) %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>บาท/ไร่</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>รายได้</p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= Comma(sum2.toFixed(2)) %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>บาท</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= Comma(fsum2.toFixed(2)) %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>บาท/ไร่</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>กำไร/ขาดทุน</p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= Comma(fsum3.toFixed(2)) %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>บาท</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p></p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <%= Comma(fsum4.toFixed(2)) %>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>บาท/ไร่</p>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 30px; text-align: center;"><button style="margin-right: 10px;background-color: #008CBA; ;color:white;margin-right: 3px;" onclick="back()">กลับ</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- End page content -->
         </div>
-
-
-        <!-- End page content -->
-    </div>
 
 
 

@@ -239,8 +239,20 @@
     }
 
     function deleteUser(id) {
-        window.location.href = '/deleteUser/' + id;
-
+        Swal.fire({
+            title: 'คุณแน่ใจใช่ไหม?',
+            text: "คุณยืนยันที่จะลบใช่หรือไม่",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#4CAF50',
+            cancelButtonColor: '#f44336',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = '/deleteUser/' + id;
+            }
+        })
     }
 
     function showUser(username, firstname, lastname, email, phone, birthday, province, district) {
