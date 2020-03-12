@@ -35,7 +35,8 @@ module.exports = {
         const mes = await Report.find();
         res.render('pages/admin/report', { mes, check });
     },
-    //ไม่ค่อยได้ใช้
+
+    //ยังไม่ได้ใช้
     saveList: async(req, res) => {
         let list = new Cultivate({
             name: req.body.namelist,
@@ -47,6 +48,7 @@ module.exports = {
         list.save();
         res.redirect(req.get('referer'));
     },
+
     saveReportAdmin: async(req, res) => {
         const listz = await User.find();
         var username = new Array();
@@ -85,6 +87,7 @@ module.exports = {
         res.render('pages/admin/manager', { list, check });
 
     },
+    //ยังไม่ได้ใช้
     deleteList: async(req, res) => {
         var id = req.params.id;
         await Cultivate.findByIdAndRemove(id, (err) => {

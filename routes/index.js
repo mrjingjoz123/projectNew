@@ -34,8 +34,12 @@ router.route('/manager').get(adminController.getManagerpage);
 router.route('/report').get(adminController.getReportpage);
 router.route('/saveReportAdmin').post(adminController.saveReportAdmin);
 router.route('/saveReportAdminSome/:user').post(adminController.saveReportAdminSome);
+
+//ยังไม่ได้ใช้
 router.route('/saveList').post(adminController.saveList);
 router.route('/deleteList/:id').get(adminController.deleteList);
+
+
 router.route('/deleteUser/:id').get(adminController.deleteUser);
 router.route('/deleteMes/:id').get(adminController.deleteMes);
 router.route('/saveEditUser/:id').post(adminController.saveEditUser);
