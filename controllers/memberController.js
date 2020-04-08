@@ -372,6 +372,12 @@ module.exports = {
 
             res.render('pages/member/detailconclude', { pay, fpay, pow, mat, num, sell, fpow, fmat, fnum, fsell, dateNew, dateOld, product, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
         }
+    },
+    listNull: async(req, res) => {
+        const list = await Cultivate.find();
+        const listmember = await Listmember.find({ user: username });
+        var check = 4;
+        res.render('pages/member/listmember', { check, listmember, list, username, password, firstname, lastname, email, phone, birthday, province, district, doctype });
     }
 
 }

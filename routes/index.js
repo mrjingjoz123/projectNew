@@ -69,6 +69,7 @@ router.route('/editHarvest/:id/:product/:id2').post(memberController.editHarvest
 router.route('/deleteHarvest/:id/:product/:id2').get(memberController.deleteHarvest);
 router.route('/showConclude/:id/:product').get(memberController.showConclude);
 router.route('/detailConclude/:id/:product').get(memberController.detailConclude);
+router.route('/listNull').post(memberController.listNull);
 //test
 axios(url)
     .then(response => {

@@ -270,7 +270,7 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    let product;
+    let product = null;
     let x = '<%= check %>';
     if (x == '1') {
         Swal.fire(
@@ -293,8 +293,16 @@
             'success'
         )
     }
+    if (x == '4') {
+        Swal.fire(
+            'เกิดข้อผิดพลาด',
+            'กรุณาเลือกพืชผลผลิต',
+            'warning'
+        )
+    }
 
     function addListmember() {
+        product = null;
         $('#myModal').modal('show');
     }
 
@@ -305,7 +313,12 @@
 
 
     function saveList(uname) {
-        document.getElementById("myForm").action = "/saveList/" + uname + "/" + product;
+        if (product !== null) {
+            document.getElementById("myForm").action = "/saveList/" + uname + "/" + product;
+        } else {
+            document.getElementById("myForm").action = "/listNull";
+        }
+
     }
 
     function editList(id, pname, count, pay) {
